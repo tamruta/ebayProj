@@ -16,5 +16,3 @@ getServletContext().getRequestDispatcher("/Users.jsp").include(request, response
 %>
 </body>
 </html>
-
-
