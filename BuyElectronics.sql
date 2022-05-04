@@ -48,13 +48,14 @@ bid_automatic bool,
 bid_limit float, 
 current_price float,
 auction_active bool,
-PRIMARY KEY (auction_id, buyer_id, seller_id, current_price),
+PRIMARY KEY (auction_id, buyer_id, seller_id),
 FOREIGN KEY (buyer_id) references users(account_id) on delete restrict on update restrict,
 FOREIGN KEY (seller_id) references users(account_id) on delete restrict on update restrict,
 FOREIGN KEY (item_id) references electronic_item(item_id) on delete restrict on update restrict);
 
 -- has a history of which auctions ended when and who it was sold to and the price it was sold at
 -- have to calculate auction_active
+-- if active, refer to the auction page, if inactive then current price is the last price so needs no reference
 CREATE TABLE IF NOT EXISTS viewHistory(
 buyer_id int, 
 seller_id int, 
@@ -69,8 +70,7 @@ FOREIGN KEY(auction_id) references auction(auction_id) on delete restrict on upd
 FOREIGN KEY(buyer_id) references auction(buyer_id) on delete restrict on update restrict,
 FOREIGN KEY(seller_id) references auction(seller_id) on delete restrict on update restrict,
 FOREIGN KEY(user_account_id) references users(account_id) on delete restrict on update restrict,
-FOREIGN KEY(item_id) references electronic_item(item_id) on delete restrict on update restrict,
-FOREIGN KEY(price) references auction(current_price) on delete restrict on update restrict);
+FOREIGN KEY(item_id) references electronic_item(item_id) on delete restrict on update restrict);
 
 -- alert gets active for a certain account_id to be alerted about item_id if alert_active is true
 CREATE TABLE IF NOT EXISTS alert(
