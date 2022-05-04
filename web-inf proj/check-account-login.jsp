@@ -17,11 +17,12 @@
     rs = st.executeQuery("select * from users where userID='" + userid + "' and password='" + pwd + "'");
     if (rs.next()) {
         session.setAttribute("userID", userid); // the username will be stored in the session
-        String accountType = rs.getString("accountType");
+        String isAdmin = rs.getBoolean("isAdmin");
+        String isCusRes = rs.getBoolean("isCusRes");
         out.println("welcome " + userid);
         out.println("<a href='logout.jsp'>Log out</a>");
-        if(accountType.equals("enduser")) response.sendRedirect("welcome.jsp");
-        else if(accountType.equals("admin")) response.sendRedirect("admin.jsp");
+        if(!isAdmin && !isCusRes) response.sendRedirect("welcome.jsp");
+        else if(isAdmin) response.sendRedirect("admin.jsp");
         else response.sendRedirect("custrep.jsp");
     } else {
         out.println("Invalid password <a href='Users.jsp'>try again</a>");
