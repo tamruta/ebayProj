@@ -2,30 +2,31 @@
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Welcome</title>
-</head>
-<body>
 <%
-		
-		ApplicationDB db = new ApplicationDB();	
-		Connection con = db.getConnection(connectionUrl, "root", "butterfly");
-
-		//Create a SQL statement
-		Statement stmt = con.createStatement("Select * from Users;");
-
-		//Get parameters from the HTML form at the HelloWorld.jsp
-		String newEmail = request.getParameter("userID");
-		String newPassword = request.getParameter("password");
+    if ((session.getAttribute("userID") == null)) {
 %>
+You are not logged in<br/>
+<a href="Users.jsp">Please Login</a>
+<%} else {
+%>
+Welcome <%=session.getAttribute("userID")%> 
+<a href='logout.jsp'>Log out</a>
 
-<p>Welcome <%out.println(newEmail);%> </p>
-<p><a href="logout.jsp">Logout</a>
+Put Items up for Sale
+<form action = 'auctionItem.jsp', method="POST">
+		Model Number: <input type="text" name="model_number"/> <br/>
+		Year: <input type="text" name="yearn"/> <br/>
+       Type of Item(Monitor, Laptop or Desktop): <input type="text" name="itemType"/> <br/>
+       Item Description(Monitor dimensions, Laptop memory or Desktop GPU): <input type="text" name="description"/> <br/>
+       Starting Price of item: <input type="text" name="startingPrice"/> <br/>
+       Minimum price that item will be sold at: <input type="text" name="minPrice"/> <br/>
+       Maximum price that item will be sold at: <input type="text" name="maxPrice"/> <br/>
+       Bid increment: <input type="text" name="bidIncrement"/> <br/>
+       Closing date (YYYY-MM-DD HH:MM:SS): <input type="text" name="closing_date"/> <br/>
+ 
+       <input type="submit" value="Post Item"/>
+</form>
 
-
-
-</body>
-</html>
+<%
+    }
+%>
