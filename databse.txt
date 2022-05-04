@@ -1,0 +1,21 @@
+CREATE TABLE users( 
+userID varchar(30),
+password varchar(30),
+accountType varchar(15),
+PRIMARY KEY (userID));
+
+CREATE TABLE Electronic_item(id_Number int PRIMARY KEY, Model_Number varchar(20), item_type varchar(20),
+ year char(4), Dimensions varchar(6), Memory varchar(5), Specifications varchar(20))
+
+Create table Auction(Auction_ID int,closing_date varchar(30),current_bid float,
+starting_price float, min_price float, increment float, max_bid float,
+buyer_id varchar(30), seller_id varchar(30), item_ID int, PRIMARY KEY(auction_id,
+seller_id), Foreign Key(buyer_id) references users(userID) on delete restrict on update restrict,
+Foreign Key(seller_id) references users(userID) on delete restrict on update restrict,
+Foreign Key(item_ID) references Electronic_Item(id_Number) on delete restrict on update restrict);
+
+Sold_items
+
+
+
+
