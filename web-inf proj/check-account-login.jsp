@@ -1,33 +1,39 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*"%>	
-	<%
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 
+<%
+    try{
 	ApplicationDB db = new ApplicationDB();	
-    //Class.forName("com.mysql.jdbc.Driver");
-    Connection con = db.getConnection();	
-    Statement st = con.createStatement(,);
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "butterfly");	
+    Statement st = con.createStatement();
     
     String userid = request.getParameter("userID");   
     String pwd = request.getParameter("password");
     
-    
+    //out.println("userID: "+userid+"\tpassword: "+pwd);
     ResultSet rs;
-    rs = st.executeQuery("select * from users where userID='" + userid + "' and password='" + pwd + "'");
+    rs = st.executeQuery("select * from users where username='" + userid + "' and user_password='" + pwd + "'");
     if (rs.next()) {
         session.setAttribute("userID", userid); // the username will be stored in the session
-        String isAdmin = rs.getBoolean("isAdmin");
-        String isCusRes = rs.getBoolean("isCusRes");
-        out.println("welcome " + userid);
+        boolean isAdmin = rs.getBoolean("isAdmin");
+        boolean isCusRes = rs.getBoolean("isCusRes");
+        if(!isAdmin && !isCusRes) out.println("welcome " + userid);//response.sendRedirect("welcome.jsp");
+        else if(isAdmin) out.println("welcome Admin "+ userid);//response.sendRedirect("admin.jsp");
+        else out.println("welcome Customer Representative "+ userid); //response.sendRedirect("custrep.jsp");
         out.println("<a href='logout.jsp'>Log out</a>");
-        if(!isAdmin && !isCusRes) response.sendRedirect("welcome.jsp");
-        else if(isAdmin) response.sendRedirect("admin.jsp");
-        else response.sendRedirect("custrep.jsp");
+
     } else {
-        out.println("Invalid password <a href='Users.jsp'>try again</a>");
+        out.println("Invalid password. <a href='Users.jsp'>try again</a>");
     }
     
     con.close();
+} catch (Exception ex) {
+    out.print(ex);
+    out.print("login failed :(");
+}
 %>
-	
+

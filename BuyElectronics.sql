@@ -88,5 +88,3 @@ item_id int,
 PRIMARY KEY(account_id),
 FOREIGN KEY(account_id) references users(account_id) on delete restrict on update restrict,
 FOREIGN KEY (item_id) references electronic_item(item_id) on delete cascade on update cascade);
-
-SELECT * FROM users;

@@ -29,23 +29,13 @@
 		</form>
 		<br>
 		<br>
-		<form method="get" action="check-account-login.jsp">
-		Sign in here
-			<table>
-				<tr>    
-					<td>E-mail</td><td><input type="text" name="userID"></td>
-				</tr>
-				<tr>
-					<td>Password</td><td><input type="text" name="password"></td>
-				</tr>
-			
-			</table>
+		<form method="post" action="check-account-login.jsp">
+		Sign in here <br>
+			Username: <input type="text" name="userID"> <br>
+			Password: <input type="text" name="password"> <br>
 			<input border="1" type="submit" value="Sign in">
 		</form>
 		<br>
 		
-		
-	
-	
 </body> 
 </html>
