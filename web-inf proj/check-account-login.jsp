@@ -7,7 +7,7 @@
 	ApplicationDB db = new ApplicationDB();	
     //Class.forName("com.mysql.jdbc.Driver");
     Connection con = db.getConnection();	
-    Statement st = con.createStatement();
+    Statement st = con.createStatement(,);
     
     String userid = request.getParameter("userID");   
     String pwd = request.getParameter("password");
