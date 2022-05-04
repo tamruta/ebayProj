@@ -10,10 +10,12 @@
 </head>
 <body>
 <%
+		
 		ApplicationDB db = new ApplicationDB();	
-		Connection con = db.getConnection();
+		Connection con = db.getConnection(connectionUrl, "root", "butterfly");
 
 		//Create a SQL statement
+		Statement stmt = con.createStatement("Select * from Users;");
 
 		//Get parameters from the HTML form at the HelloWorld.jsp
 		String newEmail = request.getParameter("userID");

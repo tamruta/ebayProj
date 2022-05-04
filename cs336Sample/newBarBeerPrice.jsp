@@ -15,7 +15,7 @@
 
 		//Get the database connection
 		ApplicationDB db = new ApplicationDB();	
-		Connection con = db.getConnection();
+		Connection con = db.getConnection(connectionUrl, "root", "butterfly");
 
 		//Create a SQL statement
 		Statement stmt = con.createStatement();
@@ -24,7 +24,6 @@
 		String newBar = request.getParameter("bar");
 		String newBeer = request.getParameter("beer");
 		float price = Float.valueOf(request.getParameter("price"));
-
 
 		//Make an insert statement for the Sells table:
 		String insert = "INSERT INTO bars(name)"
