@@ -21,7 +21,9 @@
 				<tr>
 					<td>Password</td><td><input type="text" name="password"></td>
 				</tr>
-			
+				<tr>
+       				<td>Confirm Password</td><td><input type="text" name="password2"></td>
+       			</tr>
 			</table>
 			<input type="submit" value="Create Account">
 		</form>
