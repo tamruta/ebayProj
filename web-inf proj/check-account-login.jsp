@@ -21,7 +21,7 @@
         session.setAttribute("userID", userid); // the username will be stored in the session
         boolean isAdmin = rs.getBoolean("isAdmin");
         boolean isCusRes = rs.getBoolean("isCusRes");
-        if(!isAdmin && !isCusRes) out.println("welcome " + userid);//response.sendRedirect("welcome.jsp");
+        if(!isAdmin && !isCusRes) response.sendRedirect("welcome.jsp");
         else if(isAdmin) out.println("welcome Admin "+ userid);//response.sendRedirect("admin.jsp");
         else out.println("welcome Customer Representative "+ userid); //response.sendRedirect("custrep.jsp");
         out.println("<a href='logout.jsp'>Log out</a>");
