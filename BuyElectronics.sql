@@ -68,6 +68,7 @@ INSERT INTO auction VALUES (
 -- have to calculate auction_active
 -- if active, refer to the auction page, if inactive then current price is the last price so needs no reference
 CREATE TABLE IF NOT EXISTS viewHistory(
+history_id int,
 seller_id int, 
 user_account_id int, 
 auction_id int, 
@@ -75,7 +76,7 @@ item_id int,
 end_date date,
 price float,
 auction_active bool,
-PRIMARY KEY(user_account_id, seller_id, auction_id, item_id), 
+PRIMARY KEY(history_id, user_account_id, seller_id, auction_id, item_id), 
 FOREIGN KEY(auction_id) references auction(auction_id) on delete restrict on update restrict,
 FOREIGN KEY(seller_id) references auction(seller_id) on delete restrict on update restrict,
 FOREIGN KEY(user_account_id) references users(account_id) on delete restrict on update restrict,
