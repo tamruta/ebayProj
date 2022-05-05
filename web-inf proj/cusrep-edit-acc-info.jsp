@@ -2,13 +2,34 @@
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
-
 <%
+    if ((session.getAttribute("userID") == null)) {
+%>
+You are not logged in<br/>
+<a href="Users.jsp">Please Login</a>
+<%} else {
+%>
+Welcome <%=session.getAttribute("userID")%> 
 
-	ApplicationDB db = new ApplicationDB();	
-    //Class.forName("com.mysql.jdbc.Driver");
-    Connection con = db.getConnection();	
-    Statement st = con.createStatement();
+<style> .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      font-size: 30;
+      background-color: rgb(211, 208, 208);
+      color: white;
+      text-align: center;
+    } </style>
+    
+    <div class="footer"> 
+      <p><a href='welcome.jsp'>Home</a><br><a href='logout.jsp'>Log out</a></p>
+    </div>
+<%
+    ApplicationDB db = new ApplicationDB();	
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
+    Statement st = con.createStatement();   
     
     String userid = request.getParameter("username");   
     String pwd = request.getParameter("password1");
@@ -30,8 +51,12 @@
         response.sendRedirect("cusrep.jsp");
         
     } else {
-        out.println("Invalid password <a href='HelloWorld.jsp'>try again</a>");
+        out.println("Invalid username <a href='cusrep-home.jsp'>try again</a>");
     }
     
     con.close();
+%>
+  
+<%
+}
 %>

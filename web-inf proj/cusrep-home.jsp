@@ -31,36 +31,26 @@ Welcome <%=session.getAttribute("userID")%>
 Look at questions
 <form action = '.jsp', method="POST">
        Enter the item name for bid: <input type="text" name="itemName"/> <br/>
-       <input type="submit" value="Search by Keyword:"/>
+       <input type="submit" value="Search by Keyword"/>
 </form>
 
 Delete a bid
 <form action = 'cusrep-remove-bid.jsp', method="POST">
        Enter the auction/bid id: <input type="text" name="itemName"/> <br/>
-       <input type="submit" value="Search by Keyword:"/>
+       <input type="submit" value="Search by Keyword"/>
 </form>
 
 Delete an auction
 <form action = 'cusrep-remove-auction.jsp', method="POST">
        Enter the item id: <input type="text" name="itemName"/> <br/>
-       <input type="submit" value="Search by Keyword:"/>
+       <input type="submit" value="Search by Keyword"/>
 </form>
 
 Edit an account
-    <br>
-        <form action = 'cusrep-edit-acc-info.jsp', method="post">
-        <table>
-        <tr>
-        <td>Username</td><td><input type="text" name="username"></td>
-        </tr>
-        <tr>
-        <td>New Password</td><td><input type="text" name="password1"></td>
-        </tr>
-
-        </table>
-        <input type="submit" value="submit">
-        </form>
-    <br>
+<form action = 'cusrep-edit-acc-info.jsp', method="post">
+        Username <input type="text" name="username"><br>
+        <input type="submit" value="Search by Keyword">
+</form>
     
     <a href='cusRepFeedback.jsp'>Feedback</a>
     <a href='logout.jsp'>Log out</a>

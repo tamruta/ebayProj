@@ -26,53 +26,60 @@ Welcome <%=session.getAttribute("userID")%>
       <p><a href='welcome.jsp'>Home</a><br><a href='logout.jsp'>Log out</a></p>
     </div>
 
-
 <%
 
 	ApplicationDB db = new ApplicationDB();	
-    Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
-    Statement st = con.createStatement();
-
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
+	Statement st = con.createStatement();
+    
     String item = request.getParameter("itemName");   
         
-
+	
     ResultSet rs;
-    rs = st.executeQuery("Select * from item where itemName like '%" + item + "%'");
+    rs = st.executeQuery("Select * from auction where item_id like '%" + item + "%'");
 
     if (rs.next() == true) {
-        session.setAttribute("itemName", item); // the username will be stored in the session
+        session.setAttribute("itemName", item); //delete?
         //response.sendRedirect("HelloWorld.jsp");
        // rs.first();
         %>
  		<table>
  			<tr>
- 				<td>Item ID</td>
- 				<td>Name</td>
- 				<td>Description</td>
+ 				<td>Bid ID</td>
+ 				<td>Item Type</td>
  				<td>Current Price</td>
- 				<td>Type</td>
+				<td>Seller</td>
+				<td>Buyer</td>
+ 				<td>Closing Date</td>
  				
  			</tr>
  				<%
  				rs.previous();
  				while(rs.next()){%>
  					<tr>
- 						<td><%=rs.getInt("item_ID")%></td>
- 						<td><%=rs.getString("itemName")%></td>
- 						<td><%=rs.getString("description")%></td>
- 						<td><%=rs.getInt("current_price")%></td>
- 						<td><%=rs.getString("typ")%></td>
+ 						<td><%=rs.getInt("auction_id")%></td>
+ 						<td><%=rs.getInt("item_id")%></td>
+ 						<td><%=rs.getFloat("current_price")%></td>
+						<td><%=rs.getInt("seller_id")%></td>
+ 						<td><%=rs.getInt("buyer_id")%></td>
+ 						<td><%=rs.getString("closingdate")%></td>
  						
  					</tr>
  			<%}%>
- 			<form action = 'deleteItem.jsp', method="post">
+ 			<form action = 'deleteBid.jsp', method="post">
 	        <table>
 	        <tr>
-	        <td>Enter Item ID</td><td><input type="text" name="id"></td>
+	        <td>Enter bid price</td><td><input type="text" name="bidPrice"></td>
+	        </tr>
+	        <tr>
+	        <td>Enter Item ID of bid to delete</td><td><input type="text" name="id"></td>
+	        </tr>
+	        <tr>
+	        <td>Enter date of bid</td><td><input type="text" name="date"></td>
 	        </tr>
 	        </table>
-	        <input type="submit" value="Delete Auction">
+	        <input type="submit" value="Delete Bid">
         	</form>
  	<%
     }else {
@@ -81,9 +88,8 @@ Welcome <%=session.getAttribute("userID")%>
     
     con.close();
 %>
-
+ 				
   
 <%
 }
 %>
- 				
