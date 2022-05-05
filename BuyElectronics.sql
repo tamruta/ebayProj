@@ -97,3 +97,15 @@ FOREIGN KEY(user_id) references users(account_id) on delete restrict on update r
 FOREIGN KEY(cusrep_id) references users(account_id) on delete restrict on update restrict);
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'Rootuser!1';
+
+CREATE TABLE IF NOT EXISTS automatic_bid(
+auction_id int, 
+buyer_id int,
+seller_id int,
+item_id int,
+current_price float,
+PRIMARY KEY (auction_id, buyer_id, seller_id),
+FOREIGN KEY (buyer_id) references users(account_id) on delete restrict on update restrict,
+FOREIGN KEY (seller_id) references users(account_id) on delete restrict on update restrict,
+FOREIGN KEY (item_id) references electronic_item(item_id) on delete restrict on update restrict);
+
