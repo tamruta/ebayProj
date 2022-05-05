@@ -33,20 +33,16 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
     Statement st = con.createStatement();
     
-    String s_bidPrice = request.getParameter("bidPrice");
-    String s_id = request.getParameter("id");   
-    String s_date = request.getParameter("date");
-    
-    int id = Integer.parseInt(s_id);
-    float bidPrice = Float.parseFloat(s_bidPrice);
-    
+
+    int bid_id = Integer.parseInt(request.getParameter("bidid"));   
+    int seller_id = Integer.parseInt(request.getParameter("sellerid"));
 
     ResultSet rs;
     
-    rs = st.executeQuery("Select * from bidHistory where item_ID= '" + id + "' and bidPrice ='" + bidPrice + "' and datePosted ='" + s_date + "'");
+    rs = st.executeQuery("Select * from auction where auction_id= '" + bid_id + "' and seller_id ='" + seller_id + "'");
     if (rs.next()) {
     	rs.previous();
-    	String sql = "delete from bidhistory where item_ID = ? and bidPrice = ? and datePosted = ?";
+    	String sql = "delete from auction where auction_id= '" + bid_id + "' and seller_id ='" + seller_id + "'";
 
         PreparedStatement ps = con.prepareStatement(sql);
          
@@ -58,7 +54,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
          
         
     }else {
-        out.println("This bid does not exist! <a href='cusrep.jsp'>Go Back</a>");
+        out.println("This bid does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
     }
     
     rs = st.executeQuery("Select max(bidPrice) from bidhistory where item_id = '" + id + "'");

@@ -45,7 +45,7 @@ INSERT INTO electronic_item VALUES
 
 -- shows active auctions; have to calculate current price
 CREATE TABLE IF NOT EXISTS auction(
-auction_id int, 
+auction_id int UNIQUE, 
 buyer_id int,
 seller_id int,
 item_id int,
