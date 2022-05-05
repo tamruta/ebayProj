@@ -9,7 +9,7 @@ You are not logged in<br/>
 <a href="Users.jsp">Please Login</a>
 <%} else {
 %>
-Welcome <%=session.getAttribute("userID")%> 
+Welcome <%=session.getAttribute("userID")%> <br><br>
 
 <style> .footer {
       position: fixed;
@@ -34,15 +34,9 @@ Look at questions
        <input type="submit" value="Search by Keyword"/>
 </form>
 
-Delete a bid
-<form action = 'cusrep-remove-bid.jsp', method="POST">
-       Enter the auction/bid id: <input type="text" name="itemName"/> <br/>
-       <input type="submit" value="Search by Keyword"/>
-</form>
-
-Delete an auction
-<form action = 'cusrep-remove-auction.jsp', method="POST">
-       Enter the item id: <input type="text" name="itemName"/> <br/>
+Edit an auction or bid
+<form action = 'find-bid.jsp', method="POST">
+       Enter the auction id: <input type="text" name="auctionid"/> <br/>
        <input type="submit" value="Search by Keyword"/>
 </form>
 

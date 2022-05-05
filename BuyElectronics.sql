@@ -23,7 +23,12 @@ isCusRes bool default false,
 PRIMARY KEY (account_id));
 
 -- data dump
-INSERT INTO users VALUES (1, 'admin', 'admin', true, false), (2, 'cusrep', 'cusrep', false, true), (3, 'user', 'passie', false, false);
+INSERT INTO users VALUES 
+(1, 'admin', 'admin', true, false), 
+(2, 'cusrep', 'cusrep', false, true), 
+(3, 'user', 'passie', false, false), 
+(5, 'john','hehe', false, false),
+(6, 'maddy', 'hoho', false, false);
 
 
 CREATE TABLE IF NOT EXISTS electronic_item(
@@ -34,6 +39,9 @@ item_year char(4),
 dimensions varchar(6), 
 item_memory varchar(5), 
 specifications varchar(20));
+
+INSERT INTO electronic_item VALUES
+(1, '205VA', 'monitor', '2020', '20', '128', 'something');
 
 -- shows active auctions; have to calculate current price
 CREATE TABLE IF NOT EXISTS auction(
@@ -52,6 +60,9 @@ sold_to_id int,
 PRIMARY KEY (auction_id, seller_id),
 FOREIGN KEY (seller_id) references users(account_id) on delete restrict on update restrict,
 FOREIGN KEY (item_id) references electronic_item(item_id) on delete restrict on update restrict);
+
+INSERT INTO auction VALUES (
+1, 5, 6, 1, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 127.0, true, NULL);
 
 -- has a history of which auctions ended when and who it was sold to and the price it was sold at
 -- have to calculate auction_active
@@ -110,3 +121,6 @@ FOREIGN KEY (buyer_id) references users(account_id) on delete restrict on update
 FOREIGN KEY (seller_id) references users(account_id) on delete restrict on update restrict,
 FOREIGN KEY (item_id) references electronic_item(item_id) on delete restrict on update restrict);
 
+SELECT * FROM users;
+SELECT * FROM electronic_item;
+SELECT * FROM auction;

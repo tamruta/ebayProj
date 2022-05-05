@@ -9,7 +9,7 @@ You are not logged in<br/>
 <a href="Users.jsp">Please Login</a>
 <%} else {
 %>
-Welcome <%=session.getAttribute("userID")%> 
+Welcome <%=session.getAttribute("userID")%> <br><br>
 
 <style> .footer {
       position: fixed;
@@ -33,11 +33,11 @@ Welcome <%=session.getAttribute("userID")%>
 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
 	Statement st = con.createStatement();
     
-    String item = request.getParameter("itemName");   
+    String item = request.getParameter("auctionid");   
         
 	
     ResultSet rs;
-    rs = st.executeQuery("Select * from auction where item_id like '%" + item + "%'");
+    rs = st.executeQuery("Select * from auction where auction_id like '%" + item + "%'");
 
     if (rs.next() == true) {
         session.setAttribute("itemName", item); //delete?
@@ -47,7 +47,7 @@ Welcome <%=session.getAttribute("userID")%>
  		<table>
  			<tr>
  				<td>Bid ID</td>
- 				<td>Item Type</td>
+ 				<td>Item ID</td>
  				<td>Current Price</td>
 				<td>Seller</td>
 				<td>Buyer</td>
@@ -67,20 +67,17 @@ Welcome <%=session.getAttribute("userID")%>
  						
  					</tr>
  			<%}%>
- 			<form action = 'deleteBid.jsp', method="post">
-	        <table>
-	        <tr>
-	        <td>Enter bid price</td><td><input type="text" name="bidPrice"></td>
-	        </tr>
-	        <tr>
-	        <td>Enter Item ID of bid to delete</td><td><input type="text" name="id"></td>
-	        </tr>
-	        <tr>
-	        <td>Enter date of bid</td><td><input type="text" name="date"></td>
-	        </tr>
-	        </table>
+ 			<form action = 'cusrep-delete-bid.jsp', method="post">
+	        	Enter bid price</td><td><input type="text" name="bidPrice"><br>
+	        	Enter Item ID of bid to delete</td><td><input type="text" name="id"><br>
+	        	Enter date of bid</td><td><input type="text" name="date"><br>
 	        <input type="submit" value="Delete Bid">
         	</form>
+
+			<form action = 'cusrep-delete-auction.jsp', method="post">
+				Enter Item ID</td><td><input type="text" name="id"><br>
+				<input type="submit" value="Delete Item">
+			</form>
  	<%
     }else {
         out.println("Invalid Search <a href='cusrep-home.jsp'>Go Back</a>");
@@ -88,8 +85,6 @@ Welcome <%=session.getAttribute("userID")%>
     
     con.close();
 %>
- 				
-  
 <%
 }
 %>

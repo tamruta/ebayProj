@@ -9,7 +9,7 @@ You are not logged in<br/>
 <a href="Users.jsp">Please Login</a>
 <%} else {
 %>
-Welcome <%=session.getAttribute("userID")%> 
+Welcome <%=session.getAttribute("userID")%> <br><br>
 
 <style> .footer {
       position: fixed;
