@@ -17,13 +17,13 @@ Welcome <%=session.getAttribute("userID")%>
       bottom: 0;
       width: 100%;
       font-size: 30;
-      background-color: rgb(212, 166, 166);
+      background-color: rgb(211, 208, 208);
       color: white;
       text-align: center;
     } </style>
     
     <div class="footer"> 
-      <p><a href='welcome.jsp'>Home</a><a href='logout.jsp'>Log out</a></p>
+      <p><a href='welcome.jsp'>Home</a><br><a href='logout.jsp'>Log out</a></p>
     </div>
 
 Put Items up for Sale

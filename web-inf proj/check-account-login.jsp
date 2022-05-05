@@ -8,7 +8,7 @@
     try{
 	ApplicationDB db = new ApplicationDB();	
     Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "butterfly");	
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
     Statement st = con.createStatement();
     
     String userid = request.getParameter("userID");   
