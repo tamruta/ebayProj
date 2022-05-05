@@ -27,21 +27,28 @@ Welcome <%=session.getAttribute("userID")%>
     </div>
 
 <br><br>
-Delete a bid
-<form action = 'findBid.jsp', method="POST">
+
+Look at questions
+<form action = '.jsp', method="POST">
        Enter the item name for bid: <input type="text" name="itemName"/> <br/>
        <input type="submit" value="Search by Keyword:"/>
 </form>
 
-Delete and auction
-<form action = 'findItem.jsp', method="POST">
-       Enter the item name: <input type="text" name="itemName"/> <br/>
+Delete a bid
+<form action = 'cusrep-remove-bid.jsp', method="POST">
+       Enter the auction/bid id: <input type="text" name="itemName"/> <br/>
        <input type="submit" value="Search by Keyword:"/>
 </form>
 
-Reset an account's password
+Delete an auction
+<form action = 'cusrep-remove-auction.jsp', method="POST">
+       Enter the item id: <input type="text" name="itemName"/> <br/>
+       <input type="submit" value="Search by Keyword:"/>
+</form>
+
+Edit an account
     <br>
-        <form action = 'resetPassword.jsp', method="post">
+        <form action = 'cusrep-edit-acc-info.jsp', method="post">
         <table>
         <tr>
         <td>Username</td><td><input type="text" name="username"></td>
