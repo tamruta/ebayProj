@@ -90,5 +90,14 @@ PRIMARY KEY(account_id),
 FOREIGN KEY(account_id) references users(account_id) on delete restrict on update restrict,
 FOREIGN KEY (item_id) references electronic_item(item_id) on delete cascade on update cascade);
 
+CREATE TABLE IF NOT EXISTS qna(
+q_id int PRIMARY KEY,
+question varchar(100),
+answer varchar(200),
+user_id int,
+cusrep_id int,
+FOREIGN KEY(user_id) references users(account_id) on delete restrict on update restrict,
+FOREIGN KEY(cusrep_id) references users(account_id) on delete restrict on update restrict);
+
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'Rootuser!1';
 
