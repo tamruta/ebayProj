@@ -16,13 +16,13 @@
 		Register here
 			<table>
 				<tr>    
-					<td>E-mail</td><td><input type="text" name="userID"></td>
+					<td>Username:</td><td><input type="text" name="userID"></td>
 				</tr>
 				<tr>
-					<td>Password</td><td><input type="text" name="password"></td>
+					<td>Password:</td><td><input type="text" name="password"></td>
 				</tr>
 				<tr>
-       				<td>Confirm Password</td><td><input type="text" name="password2"></td>
+       				<td>Confirm Password:</td><td><input type="text" name="password2"></td>
        			</tr>
 			</table>
 			<input type="submit" value="Create Account">
@@ -30,10 +30,16 @@
 		<br>
 		<br>
 		<form method="post" action="check-account-login.jsp">
-		Sign in here <br>
-			Username: <input type="text" name="userID"> <br>
-			Password: <input type="text" name="password"> <br>
-			<input border="1" type="submit" value="Sign in">
+		Sign in here
+			<table>
+				<tr>
+					<td>Username:</td><td><input type="text" name="userID"> </td>
+				</tr>
+				<tr>
+					<td>Password:</td><td><input type="text" name="password"></td>
+				</tr>
+			</table>
+			<input type="submit" value="Sign in">
 		</form>
 		<br>
 		

@@ -14,38 +14,43 @@
 	try {
 
 		ApplicationDB db = new ApplicationDB();	
-		Connection con = db.getConnection();
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
+		Statement st = con.createStatement();
 
-		//Create a SQL statement
-		Statement stmt = con.createStatement();
+		//Get parameters from Users.jsp
+		String userid = request.getParameter("userID");
+		String pwd = request.getParameter("password");
 
-		//Get parameters from the HTML form at the HelloWorld.jsp
-		String newEmail = request.getParameter("userID");
-		String newPassword = request.getParameter("password");
-		String accounttype = "";
-		if (newEmail.equals("sajansaylor@gmail.com")){
-			accounttype = "admin";
+		ResultSet rs;
+		rs = st.executeQuery("SELECT * FROM users where username='" + userid + "'");
+		//checks if username is already taken
+		if (rs.next()) {
+			out.println("This username is taken. <a href='Users.jsp'>Try again.</a>");
+		//make user account
+		} else {
+			String sql = "INSERT INTO users(account_id, username, user_password, isAdmin, isCusRes)"
+				+ "VALUES (?, ?, ?, ?, ?)";
+
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ResultSet rs2 = st.executeQuery("SELECT MAX(account_id) AS account_id FROM users");
+
+			rs2.next();
+
+			int account_id = rs2.getInt("account_id") + 1;
+
+			ps.setInt(1, account_id);
+			ps.setString(2, userid);
+			ps.setString(3, pwd);
+			ps.setBoolean(4, false);
+			ps.setBoolean(5, false);
+
+			ps.executeUpdate();
+			con.close();
+
+			response.sendRedirect("registrationsuccessful.jsp"); 
 		}
-		else{
-			accounttype = "enduser";
-		}
-		
-
-		//Make an insert statement for the Sells table:
-		String insert = "INSERT INTO users(userID, password, accountType)"
-				+ "VALUES (?, ?, ?)";
-		//Create a Prepared SQL statement allowing you to introduce the parameters of the query
-		PreparedStatement ps = con.prepareStatement(insert);
-		
-		ps.setString(1, newEmail);
-		ps.setString(2, newPassword);
-		ps.setString(3, accounttype);
-		//Run the query against the DB
-		ps.executeUpdate();
-		//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
-		con.close();          
-		response.sendRedirect("registrationsuccessful.jsp"); 
-		//Add parameters of the query. Start with 1, the 0-parameter is the INSERT statement itsel 
 		
 	} catch (Exception ex) {
 		response.sendRedirect("registrationerror.jsp"); 

@@ -10,6 +10,7 @@
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
     Statement st = con.createStatement();
     
+    //Gets parameters from Admin.jsp
     String userid = request.getParameter("username");   
     String pwd = request.getParameter("password");
     

@@ -10,7 +10,7 @@
 <title>eBay</title>
 </head>
 <body>
-<center><p style="color:red">Registration successful, please sign in below.</p></center>
+<center><p style="color:red">Registration successful, please sign in.</p></center>
 <%
 getServletContext().getRequestDispatcher("/Users.jsp").include(request, response);
 %>
