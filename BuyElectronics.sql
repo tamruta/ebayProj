@@ -49,8 +49,7 @@ bid_limit float,
 current_price float,
 auction_active bool,
 sold_to_id int,
-PRIMARY KEY (auction_id, buyer_id, seller_id),
-FOREIGN KEY (buyer_id) references users(account_id) on delete restrict on update restrict,
+PRIMARY KEY (auction_id, seller_id),
 FOREIGN KEY (seller_id) references users(account_id) on delete restrict on update restrict,
 FOREIGN KEY (item_id) references electronic_item(item_id) on delete restrict on update restrict);
 
@@ -58,7 +57,6 @@ FOREIGN KEY (item_id) references electronic_item(item_id) on delete restrict on 
 -- have to calculate auction_active
 -- if active, refer to the auction page, if inactive then current price is the last price so needs no reference
 CREATE TABLE IF NOT EXISTS viewHistory(
-buyer_id int, 
 seller_id int, 
 user_account_id int, 
 auction_id int, 
@@ -66,9 +64,8 @@ item_id int,
 end_date date,
 price float,
 auction_active bool,
-PRIMARY KEY(user_account_id, buyer_id, seller_id, auction_id, item_id), 
+PRIMARY KEY(user_account_id, seller_id, auction_id, item_id), 
 FOREIGN KEY(auction_id) references auction(auction_id) on delete restrict on update restrict,
-FOREIGN KEY(buyer_id) references auction(buyer_id) on delete restrict on update restrict,
 FOREIGN KEY(seller_id) references auction(seller_id) on delete restrict on update restrict,
 FOREIGN KEY(user_account_id) references users(account_id) on delete restrict on update restrict,
 FOREIGN KEY(item_id) references electronic_item(item_id) on delete restrict on update restrict);
@@ -100,4 +97,3 @@ FOREIGN KEY(user_id) references users(account_id) on delete restrict on update r
 FOREIGN KEY(cusrep_id) references users(account_id) on delete restrict on update restrict);
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'Rootuser!1';
-
