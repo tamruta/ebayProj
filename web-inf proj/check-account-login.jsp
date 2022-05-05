@@ -23,7 +23,7 @@
         boolean isCusRes = rs.getBoolean("isCusRes");
         if(!isAdmin && !isCusRes) response.sendRedirect("welcome.jsp");
         else if(isAdmin) out.println("welcome Admin "+ userid);//response.sendRedirect("admin.jsp");
-        else out.println("welcome Customer Representative "+ userid); //response.sendRedirect("custrep.jsp");
+        else response.sendRedirect("customer-rep.jsp");
         out.println("<a href='logout.jsp'>Log out</a>");
 
     } else {

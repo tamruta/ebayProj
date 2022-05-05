@@ -90,6 +90,7 @@ PRIMARY KEY(account_id),
 FOREIGN KEY(account_id) references users(account_id) on delete restrict on update restrict,
 FOREIGN KEY (item_id) references electronic_item(item_id) on delete cascade on update cascade);
 
+-- a table to store questions and answers
 CREATE TABLE IF NOT EXISTS qna(
 q_id int PRIMARY KEY,
 question varchar(100),
