@@ -127,6 +127,23 @@
  				<%}%>
  		</table>
 
+         <style> .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            font-size: 30;
+            background-color: rgb(211, 208, 208);
+            color: white;
+            text-align: center;
+          } </style>
+          
+          <div class="footer"> 
+            <p><a href='admin.jsp'>Home</a><br><a href='logout.jsp'>Log out</a></p>
+          </div>
+      
+      <br><br>
+
          <hr size="3">
 
          <a href='admin.jsp'>Return</a>
@@ -136,5 +153,6 @@
         out.print(e);
     }
     con.close();
+    session.setAttribute("acctmsg","");
     
 %>

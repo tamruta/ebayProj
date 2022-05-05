@@ -51,9 +51,6 @@ Create a new customer representative
     <br>
     
     
-    <a href='logout.jsp'>Log out</a>
-
-    
 <%
 }
 %>

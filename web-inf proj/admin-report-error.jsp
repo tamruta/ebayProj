@@ -13,6 +13,7 @@
 <center><p style="color:red">Error generating report.</p></center>
 <%
 getServletContext().getRequestDispatcher("/admin.jsp").include(request, response);
+session.setAttribute("acctmsg","");
 %>
 </body>
 </html>
