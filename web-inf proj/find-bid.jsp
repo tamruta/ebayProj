@@ -44,36 +44,37 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
         //response.sendRedirect("HelloWorld.jsp");
        // rs.first();
         %>
- 		<table>
+ 		<table border="2" cellpadding="5">
  			<tr>
  				<td>Bid ID</td>
  				<td>Item ID</td>
  				<td>Current Price</td>
 				<td>Seller</td>
 				<td>Buyer</td>
- 				<td>Closing Date</td>
  				
  			</tr>
- 				<%
- 				rs.previous();
- 				while(rs.next()){%>
- 					<tr>
- 						<td><%=rs.getInt("auction_id")%></td>
- 						<td><%=rs.getInt("item_id")%></td>
- 						<td><%=rs.getFloat("current_price")%></td>
-						<td><%=rs.getInt("seller_id")%></td>
- 						<td><%=rs.getInt("buyer_id")%></td>
- 						<td><%=rs.getString("closingdate")%></td>
- 						
- 					</tr>
+ 			<%
+ 			rs.previous();
+ 			while(rs.next()){%>
+ 				<tr>
+ 					<td><%=rs.getInt("auction_id")%></td>
+ 					<td><%=rs.getInt("item_id")%></td>
+ 					<td><%=rs.getFloat("current_price")%></td>
+					<td><%=rs.getInt("seller_id")%></td>
+ 					<td><%=rs.getInt("buyer_id")%></td>			
+ 				</tr>
  			<%}%>
- 			<form action = 'cusrep-delete-bid.jsp', method="post">
-	        	Enter bid price</td><td><input type="text" name="bidPrice"><br>
-	        	Enter Item ID of bid to delete</td><td><input type="text" name="id"><br>
-	        	Enter date of bid</td><td><input type="text" name="date"><br>
-	        <input type="submit" value="Delete Bid">
-        	</form>
+		</table>
+		<br><br>
 
+			Delete Bid
+ 			<form action = 'cusrep-delete-bid.jsp', method="post">
+	        	Enter bid price </td><td><input type="text" name="bidPrice"><br>
+	        	Enter Item ID of bid to delete </td><td><input type="text" name="id"><br>
+	        	Enter date of bid </td><td><input type="text" name="date"><br>
+	        <input type="submit" value="Delete Bid">
+        	</form><br>
+			Delete Item/Auction
 			<form action = 'cusrep-delete-auction.jsp', method="post">
 				Enter Item ID</td><td><input type="text" name="id"><br>
 				<input type="submit" value="Delete Item">
