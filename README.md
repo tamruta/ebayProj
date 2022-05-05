@@ -6,6 +6,7 @@ Meetings:
 
 
 NOTE**: This is the defualt admin account, but in the webpage you can be redirected to become an admin or customer in which you can take different actions
+
 * Admin Credentials: Username: admin , Password: admin
 * Customer Representative Credentials: Username: cusrep , Password: cusrep
 * User Credentials: Username: user, Password: passie
@@ -32,3 +33,6 @@ need to add!
 * delete bid page
 * view history page
 * QnA page: see questions and answers
+
+Remember to change the password in ApplicationDB.java file under WEB-INF and in the check-account-login page.
+Added footer to pages

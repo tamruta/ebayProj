@@ -97,3 +97,17 @@ Succesfully added item for sale,
 <%
 con.close();
 %>
+<style> .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    font-size: 30;
+    background-color: rgb(212, 166, 166);
+    color: white;
+    text-align: center;
+  } </style>
+  
+  <div class="footer"> 
+    <p><a href='welcome.jsp'>Home</a><a href='logout.jsp'>Log out</a></p>
+  </div>
