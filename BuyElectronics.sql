@@ -23,7 +23,7 @@ isCusRes bool default false,
 PRIMARY KEY (account_id));
 
 -- data dump
-INSERT INTO users VALUES (1, 'admin', 'admin', true, false), (2, 'cusrep', 'cusrep', false, true);
+INSERT INTO users VALUES (1, 'admin', 'admin', true, false), (2, 'cusrep', 'cusrep', false, true), (3, 'user', 'passie', false, false);
 
 
 CREATE TABLE IF NOT EXISTS electronic_item(
