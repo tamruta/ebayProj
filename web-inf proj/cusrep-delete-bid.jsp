@@ -34,48 +34,25 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
     Statement st = con.createStatement();
     
 
-    int bid_id = Integer.parseInt(request.getParameter("bidid"));   
+    int auction_id = Integer.parseInt(request.getParameter("bidid"));   
     int seller_id = Integer.parseInt(request.getParameter("sellerid"));
 
     ResultSet rs;
     
-    rs = st.executeQuery("Select * from auction where auction_id= '" + bid_id + "' and seller_id ='" + seller_id + "'");
+    rs = st.executeQuery("Select * from auction where auction_id= '" + auction_id + "' and seller_id ='" + seller_id + "'");
     if (rs.next()) {
     	rs.previous();
-    	String sql = "delete from auction where auction_id= '" + bid_id + "' and seller_id ='" + seller_id + "'";
+    	String sql = "delete from auction where auction_id = ? and seller_id = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
          
-        ps.setInt(1, id);
- 		ps.setFloat(2, bidPrice);
- 		ps.setString(3, s_date);
+        ps.setInt(1, auction_id);
+ 		ps.setFloat(2, seller_id);
         ps.executeUpdate();
-        
-         
-        
+        out.println("Successful! <a href='cusrep-home.jsp'>Customer Rep Home</a>");
     }else {
         out.println("This bid does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
-    }
-    
-    rs = st.executeQuery("Select max(bidPrice) from bidhistory where item_id = '" + id + "'");
-    if(rs.next()){
-    	float newPrice = rs.getFloat("max(bidPrice)");
-    	String sql = "UPDATE item SET current_price = ? WHERE item_ID = ?";
-    	
-    	PreparedStatement ps = con.prepareStatement(sql);
-    	ps.setFloat(1, newPrice);
-    	ps.setInt(2, id);
-    	ps.executeUpdate();  
-    	
-    }else{
-		String sql = "UPDATE item SET current_price = 0 WHERE item_ID = ?";
-    	PreparedStatement ps = con.prepareStatement(sql);
-    	ps.setInt(1, id);
-    	ps.executeUpdate();  
-    }
-    
-    response.sendRedirect("cusrep.jsp");
-      
+    } 
     
     con.close();
 %>			

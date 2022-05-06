@@ -34,54 +34,44 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
     Statement st = con.createStatement();
 
-    String item = request.getParameter("itemName");   
+	int item_id = Integer.parseInt(request.getParameter("id"));   
+
+    ResultSet rs; 
+    
+    rs = st.executeQuery("Select * from auction where item_id = '" + item_id + "'");
+	if (rs.next()) {
+    	
+    	String sql = "delete from auction where item_id = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, item_id);
+        ps.executeUpdate();
         
-
-    ResultSet rs;
-    rs = st.executeQuery("Select * from item where itemName like '%" + item + "%'");
-
-    if (rs.next() == true) {
-        session.setAttribute("itemName", item); // the username will be stored in the session
-        //response.sendRedirect("HelloWorld.jsp");
-       // rs.first();
-        %>
- 		<table>
- 			<tr>
- 				<td>Item ID</td>
- 				<td>Name</td>
- 				<td>Description</td>
- 				<td>Current Price</td>
- 				<td>Type</td>
- 				
- 			</tr>
- 				<%
- 				rs.previous();
- 				while(rs.next()){%>
- 					<tr>
- 						<td><%=rs.getInt("item_ID")%></td>
- 						<td><%=rs.getString("itemName")%></td>
- 						<td><%=rs.getString("description")%></td>
- 						<td><%=rs.getInt("current_price")%></td>
- 						<td><%=rs.getString("typ")%></td>
- 						
- 					</tr>
- 			<%}%>
- 			<form action = 'deleteItem.jsp', method="post">
-	        <table>
-	        <tr>
-	        <td>Enter Item ID</td><td><input type="text" name="id"></td>
-	        </tr>
-	        </table>
-	        <input type="submit" value="Delete Auction">
-        	</form>
- 	<%
+        
     }else {
-        out.println("Invalid Search <a href='cusrep-home.jsp'>Go Back</a>");
+        out.println("This item does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
     }
+    
+    
+    rs = st.executeQuery("Select * from electronic_item where item_id= '" + item_id + "'");
+    if (rs.next()) {
+    	
+    	String sql = "delete from electronic_item where item_id = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, item_id);
+        ps.executeUpdate();
+        
+        out.println("Success! <a href='cusrep-home.jsp'>Go Back</a>");
+        
+    }else {
+        out.println("This item does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
+    }
+
+      
     
     con.close();
 %>
-
   
 <%
 }
