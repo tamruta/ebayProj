@@ -87,7 +87,7 @@ INSERT INTO auction VALUES
 -- have to calculate auction_active
 -- if active, refer to the auction page, if inactive then current price is the last price so needs no reference
 CREATE TABLE IF NOT EXISTS viewHistory(
-history_id int,
+history_id int UNIQUE,
 seller_id int, 
 user_account_id int, 
 auction_id int, 

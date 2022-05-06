@@ -45,7 +45,8 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
         %>
  		<table border="2" cellpadding="5">
  			<tr>
- 				<td>Bid ID</td>
+ 				<td>Auction ID</td>
+				<td>Bid ID</td>
  				<td>Item ID</td>
  				<td>Current Price</td>
 				<td>Seller</td>
@@ -57,6 +58,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
  			while(rs.next()){%>
  				<tr>
  					<td><%=rs.getInt("auction_id")%></td>
+					<td><%=rs.getInt("history_id")%></td>
  					<td><%=rs.getInt("item_id")%></td>
  					<td><%=rs.getFloat("current_price")%></td>
 					<td><%=rs.getInt("seller_id")%></td>
@@ -71,9 +73,11 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 		Delete Bid
  		<form action = 'cusrep-delete-bid.jsp', method="post">
 	    	Enter Bid ID of bid to delete </td><td><input type="text" name="bidid"><br>
+			Enter Item ID of bid to delete </td><td><input type="text" name="itemid"><br>
 	    	Enter Seller ID </td><td><input type="text" name="sellerid"><br>
         <input type="submit" value="Delete Bid">
     	</form><br>
+
 		Delete Item/Auction
 		<form action = 'cusrep-delete-auction.jsp', method="post">
 			Enter Item ID</td><td><input type="text" name="id"><br>
