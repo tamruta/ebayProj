@@ -11,31 +11,23 @@
     Statement st1 = con.createStatement();
     String sql1 = "select sum(current_price) as total from auction where auction_active = 'false' and sold_to_id is not null";
     ResultSet total_earnings = st1.executeQuery(sql1);
-
     Statement st2 = con.createStatement();
     String sql2 = "select e.model_Number as item, sum(a.current_price) as total from electronic_item e join auction a using (item_id) where a.auction_active = 'false' and a.sold_to_id is not null group by e.model_Number";
     ResultSet earnings_item = st2.executeQuery(sql2);
-
     Statement st3 = con.createStatement();
     String sql3 = "select e.item_type as item_type, sum(a.current_price) as total from auction a join electronic_item e using (item_id) where auction_active = 'false' and sold_to_id is not null group by e.item_type";
     ResultSet earnings_itemtype = st3.executeQuery(sql3);
-
     Statement st4 = con.createStatement();
     String sql4 = "select u.username, sum(a.current_price) as total from auction a, users u where u.account_id = a.seller_id and auction_active = 'false' and sold_to_id is not null group by u.username";
     ResultSet earnings_user = st4.executeQuery(sql4);
-
     Statement st5 = con.createStatement();
     String sql5 = "select e.model_Number as item, count(*) as num_sold, sum(a.current_price) as total from electronic_item e join auction a using (item_id) where a.auction_active = 'false' and a.sold_to_id is not null group by e.model_Number order by total desc limit 3";
     ResultSet best_items = st5.executeQuery(sql5);
-
     Statement st6 = con.createStatement();
     String sql6 = "select u.username, count(*) as num_purchases, sum(a.current_price) as total from auction a, users u where u.account_id = a.buyer_id and auction_active = 'false' and sold_to_id is not null group by u.username order by total desc limit 3";
     ResultSet best_buyers = st6.executeQuery(sql6);
-
-
     try{
         total_earnings.next();
-
         %>
  		<table>
  			<tr>
@@ -151,8 +143,7 @@
     }
     catch(Exception e) {
         out.print(e);
-		response.sendRedirect("admin-report-error.jsp");
-
+        response.sendRedirect("admin-report-error.jsp");
     }
     con.close();
     session.setAttribute("acctmsg","");

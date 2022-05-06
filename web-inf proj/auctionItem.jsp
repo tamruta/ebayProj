@@ -3,10 +3,11 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*,java.util.Date.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%
-ApplicationDB db = new ApplicationDB();
-//Class.forName("com.mysql.jdbc.Driver");
-Connection con = db.getConnection();
+ApplicationDB db = new ApplicationDB();	
+Class.forName("com.mysql.jdbc.Driver");
+Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
 Statement st = con.createStatement();
+
 
 
 String tempmodel_number = request.getParameter("model_number");
@@ -24,7 +25,9 @@ float min_price = Float.parseFloat(tempm_price);
 String tempmax_price = request.getParameter("maxPrice");
 float max_price = Float.parseFloat(tempmax_price);
 
-String item_desc = request.getParameter("description");
+String item_dim = request.getParameter("dimensions");
+String item_specs = request.getParameter("specifications");
+String item_mem = request.getParameter("memory");
 
 String year = request.getParameter("year");
 
@@ -33,81 +36,104 @@ float bid_increment = Float.parseFloat(temp_BidIncre);
 
 String closing_date = request.getParameter("closing_date");
 
+
+
+
 //java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //java.util.Date endDateTime = format.parse(strEndDateTime);
 
-ResultSet rs = st.executeQuery("SELECT MAX(id_number) as ID from electronic_item");
+ResultSet rs = st.executeQuery("SELECT MAX(item_id) as ID from electronic_item");
 rs.next();
-
 int id_number = rs.getInt("ID") + 1;
-String create_item = "INSERT INTO electronic_item(id_number, Model_Number, item_type, year, Dimensions, Memory, Specifications)" + 
-"VALUES (?,?,?,?,null,null,null )";
+
+String create_item = "INSERT INTO electronic_item(item_id, model_Number, item_type, item_year, dimensions, item_memory, specifications)" + 
+"VALUES (?,?,?,?,?,?,? )";
 PreparedStatement item_ps = con.prepareStatement(create_item);
 
 item_ps.setInt(1, id_number);
 item_ps.setInt(2, model_number);
 item_ps.setString(3, item_type);
 item_ps.setString(4, year);
+item_ps.setString(5, item_dim);
+item_ps.setString(6, item_specs);
+item_ps.setString(7, item_mem);
 
 item_ps.executeUpdate();
 
+/*
 if(item_type.equalsIgnoreCase("Monitor")){
-    String update = "UPDATE electronic_item SET Dimensions = ? WHERE id_number = ?";
+    String update = "UPDATE electronic_item SET dimensions = ? WHERE item_id = ?";
     PreparedStatement item_ps_update1 = con.prepareStatement(update);
     item_ps_update1.setString(1, item_desc);
     item_ps_update1.setInt(2, id_number);
     item_ps_update1.executeUpdate();
 }else if(item_type.equalsIgnoreCase("Laptop")){
-    String update = "UPDATE electronic_item SET Memory = ? WHERE id_number = ?";
+    String update = "UPDATE electronic_item SET item_memory = ? WHERE item_id = ?";
     PreparedStatement item_ps_update2 = con.prepareStatement(update);
     item_ps_update2.setString(1, item_desc);
     item_ps_update2.setInt(2, id_number);
     item_ps_update2.executeUpdate();
 }else{
-	String update = "UPDATE electronic_item SET Specifications = ? WHERE id_number = ?";
+	String update = "UPDATE electronic_item SET specifications = ? WHERE item_id = ?";
 	PreparedStatement item_ps_update3 = con.prepareStatement(update);
 	item_ps_update3.setString(1, item_desc);
     item_ps_update3.setInt(2, id_number);
     item_ps_update3.executeUpdate();
 }
-ResultSet rs2 = st.executeQuery("SELECT MAX(Auction_ID) as ID from auction");
+*/
+
+ResultSet rs2 = st.executeQuery("SELECT MAX(auction_id) as ID from auction");
 rs2.next();
 int auction_id = rs2.getInt("ID") + 1;
-String create_auction = "INSERT INTO auction(Auction_ID, closing_date, current_bid, starting_price, min_price, increment, max_bid, buyer_id, seller_id, item_ID)" + 
-"VALUES (?,?,null,?,?,?,?,null,?,?)";
+String create_auction = "INSERT INTO auction(auction_id, buyer_id, seller_id, item_id, closing_date, starting_price, min_price, increment, bid_limit, current_price, auction_active, sold_to_id)" + 
+"VALUES (?,null,?,?,?,?,?,?,?,?,?,null)";
 PreparedStatement auction_ps = con.prepareStatement(create_auction);
 
 auction_ps.setInt(1, auction_id);
-auction_ps.setString(2, closing_date);
-auction_ps.setFloat(3, starting_price);
-auction_ps.setFloat(4, min_price);
-auction_ps.setFloat(5, bid_increment);
-auction_ps.setFloat(6, max_price);
-auction_ps.setString(7, (String)session.getAttribute("userID"));
-auction_ps.setInt(8, id_number);
+auction_ps.setInt(2, (Integer) session.getAttribute("account_num"));
+auction_ps.setFloat(3, id_number);
+auction_ps.setString(4, closing_date);
+auction_ps.setFloat(5, starting_price);
+auction_ps.setFloat(6, min_price);
+auction_ps.setFloat(7, bid_increment);
+auction_ps.setFloat(8, max_price);
+auction_ps.setFloat(9, 0);
+auction_ps.setBoolean(10, true);
 
 auction_ps.executeUpdate();
+
+ResultSet rsA;
+rsA = st.executeQuery("select * from alert where alert_type = 'Item now available " + item_type + "'" + " and alert_active = false" );
+
+try{
+	while(rsA.next()){
+		int account_to_alert =  rsA.getInt("account_id");
+		String alert = "INSERT INTO alert VALUES(?,?,?,?,?)";
+		PreparedStatement al = con.prepareStatement(alert);
+
+		ResultSet aid = st.executeQuery("SELECT MAX(alert_id) as ID from alert");
+		aid.next();
+		int accountID = aid.getInt("ID") + 1;
+
+		al.setInt(1,accountID);
+		al.setInt(2,account_to_alert);
+		al.setInt(3,id_number);
+		al.setBoolean(4,true);
+		al.setString(5,"Item now available " + item_type);
+		al.executeUpdate();
+	}
+}
+catch(Exception e){
+	
+}
+	
 
 
 %>
 Succesfully added item for sale, 
 <%=session.getAttribute("userID")%>
-<a href='success.jsp'>Go Back</a>
+<a href='welcome.jsp'>Go Back</a>
 
 <%
 con.close();
 %>
-<style> .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    font-size: 30;
-    background-color: rgb(212, 166, 166);
-    color: white;
-    text-align: center;
-  } </style>
-  
-  <div class="footer"> 
-    <p><a href='welcome.jsp'>Home</a><a href='logout.jsp'>Log out</a></p>
-  </div>

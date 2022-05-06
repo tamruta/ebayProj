@@ -4,7 +4,6 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
 <%
-
     ApplicationDB db = new ApplicationDB();	
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
@@ -24,24 +23,18 @@
     } else {
         String sql = "INSERT INTO users(account_id, username, user_password, isAdmin, isCusRes)"
             + "VALUES (?, ?, ?, ?, ?)";
-
         PreparedStatement ps = con.prepareStatement(sql);
         
         ResultSet rs2 = st.executeQuery("SELECT MAX(account_id) AS account_id FROM users");
-
         rs2.next();
-
         int account_id = rs2.getInt("account_id") + 1;
-
         ps.setInt(1, account_id);
 		ps.setString(2, userid);
         ps.setString(3, pwd);
         ps.setBoolean(4, false);
         ps.setBoolean(5, true);
-
         ps.executeUpdate();
         con.close();
-
         session.setAttribute("acctmsg","Account successfully created");
         response.sendRedirect("admin.jsp");
     }
