@@ -34,12 +34,12 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
     Statement st = con.createStatement();
     
 
-    int auction_id = Integer.parseInt(request.getParameter("bidid"));   
+    int history_id = Integer.parseInt(request.getParameter("bidid"));   
     int seller_id = Integer.parseInt(request.getParameter("sellerid"));
 
     ResultSet rs;
     
-    rs = st.executeQuery("Select * from auction where auction_id= '" + auction_id + "' and seller_id ='" + seller_id + "'");
+    rs = st.executeQuery("Select * from viewHistory where history_id= '" + history_id + "' and seller_id ='" + seller_id + "'");
     if (rs.next()) {
     	rs.previous();
     	String sql = "delete from auction where auction_id = ? and seller_id = ?";
