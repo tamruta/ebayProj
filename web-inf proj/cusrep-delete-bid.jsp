@@ -27,23 +27,20 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
     </div>
 
 <%
-
     ApplicationDB db = new ApplicationDB();	
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
     Statement st = con.createStatement();
     
-
     int history_id = Integer.parseInt(request.getParameter("bidid"));   
     int seller_id = Integer.parseInt(request.getParameter("sellerid"));
-
     ResultSet rs;
     
     rs = st.executeQuery("Select * from viewHistory where history_id= '" + history_id + "' and seller_id ='" + seller_id + "'");
     if (rs.next()) {
     	rs.previous();
+    	int auction_id = rs.getInt("auction_id");
     	String sql = "delete from auction where auction_id = ? and seller_id = ?";
-
         PreparedStatement ps = con.prepareStatement(sql);
          
         ps.setInt(1, auction_id);

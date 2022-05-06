@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
@@ -18,7 +17,8 @@
     ResultSet rs;
     rs = st.executeQuery("select * from users where username='" + userid + "' and user_password='" + pwd + "'");
     if (rs.next()) {
-        session.setAttribute("userID", userid); // the username will be stored in the session
+        session.setAttribute("userID", userid);
+        session.setAttribute("account_num", rs.getInt("account_id"));// the username will be stored in the session
         boolean isAdmin = rs.getBoolean("isAdmin");
         boolean isCusRes = rs.getBoolean("isCusRes");
         if(!isAdmin && !isCusRes) response.sendRedirect("welcome.jsp");
@@ -28,7 +28,6 @@
         } 
         else response.sendRedirect("cusrep-home.jsp");
         out.println("<a href='logout.jsp'>Log out</a>");
-
     } else {
         out.println("Invalid password. <a href='Users.jsp'>try again</a>");
     }
@@ -39,4 +38,3 @@
     out.print("login failed :(");
 }
 %>
-

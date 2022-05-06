@@ -40,9 +40,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
     if (rs.next()) {	
     	session.setAttribute("user", userid); // the username will be stored in the session
         out.println("<a href='logout.jsp'>Log out</a>");
-
         String sql = "UPDATE account SET password = ? WHERE userName= ?";
-
         PreparedStatement ps = con.prepareStatement(sql);
         
         ps.setString(1, pwd);
