@@ -84,10 +84,12 @@ FOREIGN KEY(item_id) references electronic_item(item_id) on delete restrict on u
 
 -- alert gets active for a certain account_id to be alerted about item_id if alert_active is true
 CREATE TABLE IF NOT EXISTS alert(
+alert_id int,
 account_id int, 
 item_id int, 
 alert_active bool default false,
-PRIMARY KEY(account_id, item_id),
+alert_type varchar(100),
+PRIMARY KEY(alert_id,account_id),
 FOREIGN KEY(account_id) references users(account_id) on delete restrict on update restrict,
 FOREIGN KEY(item_id) references electronic_item(item_id) on delete cascade on update cascade);
 
