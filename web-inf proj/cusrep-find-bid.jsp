@@ -36,7 +36,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
         
 	
     ResultSet rs;
-    rs = st.executeQuery("Select * from auction where auction_id like '%" + item + "%'");
+    rs = st.executeQuery("Select * from viewHistory where auction_id like '%" + item + "%'");
 
     if (rs.next() == true) {
         session.setAttribute("itemName", item); //delete?
