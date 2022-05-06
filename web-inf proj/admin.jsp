@@ -24,7 +24,7 @@ Welcome <%=session.getAttribute("userID")%>
     } </style>
     
     <div class="footer"> 
-      <p><a href='welcome.jsp'>Home</a><br><a href='logout.jsp'>Log out</a></p>
+      <p><a href='admin.jsp'>Home</a><br><a href='logout.jsp'>Log out</a></p>
     </div>
 
 <br><br>
