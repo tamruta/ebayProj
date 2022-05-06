@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
@@ -39,44 +38,48 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
     int item_id = Integer.parseInt(request.getParameter("itemid")); 
     int seller_id = Integer.parseInt(request.getParameter("sellerid"));
 
-    ResultSet rs;
+    ResultSet rs, rs2;
     
-    rs = st.executeQuery("Select * from viewHistory where history_id= '" + history_id + "' and seller_id ='" + seller_id + "'");
+    rs = st.executeQuery("Select * from viewHistory where history_id= '" + history_id + "' and seller_id ='" + seller_id + "' and item_id ='" + item_id+ "'");
     if (rs.next()) {
     	rs.previous();
-    	String sql = "delete from auction where auction_id = ? and seller_id = ?";
+    	String sql = "delete from viewHistory where history_id = ? and seller_id = ? and item_id=?";
 
         PreparedStatement ps = con.prepareStatement(sql);
          
-        ps.setInt(1, auction_id);
- 		ps.setFloat(2, seller_id);
+        ps.setInt(1, history_id);
+ 		ps.setInt(2, seller_id);
+        ps.setInt(3, item_id);
         ps.executeUpdate();
         
-    }else {
-        out.println("This bid does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
-    } 
-
-    rs = st.executeQuery("Select max(bidPrice) from viewHistory where item_id = '" + seller_id + "'");
-    if(rs.next()){
-    	float newPrice = rs.getFloat("max(bidPrice)");
-    	String sql = "UPDATE item SET current_price = ? WHERE item_ID = ?";
-    	
-    	PreparedStatement ps = con.prepareStatement(sql);
-    	ps.setFloat(1, newPrice);
-    	ps.setInt(2, id);
-    	ps.executeUpdate(); 
-        
-        out.println("Successful! <a href='cusrep-home.jsp'>Customer Rep Home</a>");
-    	
-    }else{
-		String sql = "UPDATE item SET current_price = 0 WHERE item_ID = ?";
-    	PreparedStatement ps = con.prepareStatement(sql);
-    	ps.setInt(1, id);
-    	ps.executeUpdate();  
-    }
     
+
+        rs2 = st.executeQuery("Select max(price), seller_id from viewHistory where item_id = '" + item_id + "' group by seller_id");
+        if(rs2.next()){
+            float newPrice = rs2.getFloat("max(price)");
+            int seller_id2 = rs2.getInt("seller_id");
+            String sql2 = "UPDATE auction SET current_price = ? AND seller_id = ? WHERE item_id = ?";
+            
+            PreparedStatement ps2 = con.prepareStatement(sql2);
+            ps2.setFloat(1, newPrice);
+            ps2.setInt(2, seller_id);
+            ps2.setInt(3, item_id);
+            ps2.executeUpdate(); 
+            
+            out.println("Successful! <a href='cusrep-home.jsp'>Customer Rep Home</a>");
+            
+        }else{
+            String sql3 = "UPDATE auction SET current_price = 0 WHERE item_id = ?";
+            PreparedStatement ps3 = con.prepareStatement(sql3);
+            ps3.setInt(1, item_id);
+            ps3.executeUpdate();  
+        }
+    }else {
+    out.println("This bid does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
+    }    
     con.close();
 %>			
   
 <%
 }
+%>

@@ -68,8 +68,8 @@ current_price float,
 auction_active bool,
 sold_to_id int,
 PRIMARY KEY (auction_id, seller_id),
-FOREIGN KEY (seller_id) references users(account_id) on delete restrict on update restrict,
-FOREIGN KEY (item_id) references electronic_item(item_id) on delete restrict on update restrict);
+FOREIGN KEY (seller_id) references users(account_id) on delete cascade on update cascade,
+FOREIGN KEY (item_id) references electronic_item(item_id) on delete cascade on update cascade);
 
 INSERT INTO auction VALUES 
 (1, 5, 6, 1, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 200.0, false, 5),
@@ -88,6 +88,7 @@ INSERT INTO auction VALUES
 -- if active, refer to the auction page, if inactive then current price is the last price so needs no reference
 CREATE TABLE IF NOT EXISTS viewHistory(
 history_id int UNIQUE,
+buyer_id int,
 seller_id int, 
 user_account_id int, 
 auction_id int, 
@@ -100,6 +101,13 @@ FOREIGN KEY(auction_id) references auction(auction_id) on delete restrict on upd
 FOREIGN KEY(seller_id) references auction(seller_id) on delete restrict on update restrict,
 FOREIGN KEY(user_account_id) references users(account_id) on delete restrict on update restrict,
 FOREIGN KEY(item_id) references electronic_item(item_id) on delete restrict on update restrict);
+
+INSERT INTO viewHistory VALUES 
+(12, 4, 5, 2, 1, 3, '2022-05-05', 10000, true),
+(10, 4, 5, 2, 1, 3, '2022-05-05', 5000, true),
+(11, 4, 5, 2, 1, 3, '2022-05-05', 7500, true),
+(9, 4, 5, 2, 1, 3, '2022-05-05', 1000, true);
+
 
 -- alert gets active for a certain account_id to be alerted about item_id if alert_active is true
 CREATE TABLE IF NOT EXISTS alert(
@@ -147,3 +155,6 @@ FOREIGN KEY (item_id) references electronic_item(item_id) on delete restrict on 
 SELECT * FROM users;
 SELECT * FROM electronic_item;
 SELECT * FROM auction;
+SELECT * FROM viewHistory;
+
+Select max(price), seller_id from viewHistory where item_id = 3;

@@ -36,20 +36,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 
 	int item_id = Integer.parseInt(request.getParameter("id"));   
 
-    ResultSet rs; 
-    
-    rs = st.executeQuery("Select * from auction where item_id = '" + item_id + "'");
-	if (rs.next()) {
-    	
-    	String sql = "delete from auction where item_id = ?";
-
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, item_id);
-        ps.executeUpdate();
-        
-    }else {
-        out.println("This item does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
-    }
+    ResultSet rs, rs1, rs2; 
     
     rs = st.executeQuery("Select * from viewHistory where item_id = '" + item_id + "'");
 	if (rs.next()) {
@@ -63,9 +50,23 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
     }else {
         out.println("This item does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
     }
+
+    rs2 = st.executeQuery("Select * from auction where item_id = '" + item_id + "'");
+	if (rs2.next()) {
+    	
+    	String sql = "delete from auction where item_id = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, item_id);
+        ps.executeUpdate();
+        
+    }else {
+        out.println("This item does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
+    }
     
-    rs = st.executeQuery("Select * from electronic_item where item_id= '" + item_id + "'");
-    if (rs.next()) {
+
+    rs1 = st.executeQuery("Select * from electronic_item where item_id= '" + item_id + "'");
+    if (rs1.next()) {
     	
     	String sql3 = "delete from electronic_item where item_id = ?";
 
@@ -73,11 +74,14 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
         ps.setInt(1, item_id);
         ps.executeUpdate();
         
-        out.println("Success! <a href='cusrep-home.jsp'>Go Back</a>");
         
     }else {
         out.println("This item does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
     }
+
+    
+
+    out.println("Success! <a href='cusrep-home.jsp'>Go Back</a>");
 
     con.close();
 %>

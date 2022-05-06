@@ -61,7 +61,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
  					<td><%=rs.getInt("auction_id")%></td>
 					<td><%=rs.getInt("history_id")%></td>
  					<td><%=rs.getInt("item_id")%></td>
- 					<td><%=rs.getFloat("current_price")%></td>
+ 					<td><%=rs.getFloat("price")%></td>
 					<td><%=rs.getInt("seller_id")%></td>
  					<td><%=rs.getInt("buyer_id")%></td>			
  				</tr>
@@ -93,3 +93,4 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 %>
 <%
 }
+%>

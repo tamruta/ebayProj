@@ -35,7 +35,7 @@ Look at questions
 </form>
 
 Edit an auction or bid
-<form action = 'find-bid.jsp', method="POST">
+<form action = 'cusrep-find-bid.jsp', method="POST">
        Enter the auction id: <input type="text" name="auctionid"/> <br/>
        <input type="submit" value="Search by Keyword"/>
 </form>
