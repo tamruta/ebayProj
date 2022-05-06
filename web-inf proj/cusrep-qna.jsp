@@ -28,6 +28,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 
 <br><br>
 
+<a href="#" onclick="history.go(-1)">Go Back onclick</a>
 
 
 <%

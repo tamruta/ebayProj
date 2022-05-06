@@ -37,7 +37,7 @@ String item = request.getParameter("auctionid");
     
 
 ResultSet rs;
-rs = st.executeQuery("Select * from users");
+rs = st.executeQuery("Select * from qna);
 
 if (rs.next() == true) {
     session.setAttribute("itemName", item); //delete?
@@ -46,20 +46,24 @@ if (rs.next() == true) {
     %>
      <table border="2" cellpadding="5">
          <tr>
-             <td>User ID</td>
-            <td>Username</td>
-             <td>Is Admin</td>
-             <td>Is Customer Rep</td>
+             <td>Auction ID</td>
+            <td>Bid ID</td>
+             <td>Item ID</td>
+             <td>Current Price</td>
+            <td>Seller</td>
+            <td>Buyer</td>
              
          </tr>
          <%
          rs.previous();
          while(rs.next()){%>
              <tr>
-                 <td><%=rs.getInt("account_id")%></td>
-                <td><%=rs.getString("username")%></td>
-                 <td><%=rs.getBoolean("isAdmin")%></td>
-                 <td><%=rs.getBoolean("isCusRes")%></td>			
+                 <td><%=rs.getInt("auction_id")%></td>
+                <td><%=rs.getInt("history_id")%></td>
+                 <td><%=rs.getInt("item_id")%></td>
+                 <td><%=rs.getFloat("price")%></td>
+                <td><%=rs.getInt("seller_id")%></td>
+                 <td><%=rs.getInt("buyer_id")%></td>			
              </tr>
          <%}%>
     </table>
@@ -67,22 +71,19 @@ if (rs.next() == true) {
 
     <br><br>
 
-    
-    <form action="cusrep-edit-acc-info.jsp" method="post">
-        Username <input type="text" name="un"><br>
-        Password <input type="text" name="pw"><br>
-        New Username <input type="text" name="newun"><br>
-        New Password <input type="text" name="newpw"><br>
-        <label for="do-this">Action to perform</label>
-        <select name="perform">
-        <option value="del-acc">Delete Account</option>
-        <option value="chn-pw">Change Password</option>
-        <option value="chn-usn">Change Username</option>
-        </select>
-        <input type="submit">
-    </form>
+    Delete Bid
+     <form action = 'cusrep-delete-bid.jsp', method="post">
+        Enter Bid ID of bid to delete </td><td><input type="text" name="bidid"><br>
+        Enter Item ID of bid to delete </td><td><input type="text" name="itemid"><br>
+        Enter Seller ID </td><td><input type="text" name="sellerid"><br>
+    <input type="submit" value="Delete Bid">
+    </form><br>
 
-    
+    Delete Item/Auction
+    <form action = 'cusrep-delete-auction.jsp', method="post">
+        Enter Item ID</td><td><input type="text" name="id"><br>
+        <input type="submit" value="Delete Item">
+    </form>
  <%
 }else {
     out.println("Invalid Search <a href='cusrep-home.jsp'>Go Back</a>");

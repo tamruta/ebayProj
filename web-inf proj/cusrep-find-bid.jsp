@@ -91,6 +91,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
     
     con.close();
 %>
+<a href="#" onclick="history.go(-1)">Go Back onclick</a>
 <%
 }
 %>

@@ -26,7 +26,6 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
       <p><a href='welcome.jsp'>Home</a><br><a href='logout.jsp'>Log out</a></p>
     </div>
 
-<br><br>
 
 Look at questions
 <form action = 'cusrep-qna.jsp', method="POST">
@@ -34,7 +33,7 @@ Look at questions
        <input type="submit" value="Search by Keyword"/>
 </form>
 
-Edit an auction or bid
+Edit an auction or bid (Press Search to see all entries)
 <form action = 'cusrep-find-bid.jsp', method="POST">
        Enter the auction id: <input type="text" name="auctionid"/> <br/>
        <input type="submit" value="Search by Keyword"/>
@@ -45,7 +44,8 @@ Edit an account
   <button type="submit">Continue</button>
 </form>
 
-    
+<a href="#" onclick="history.go(-1)">Go Back onclick</a>
+
     <a href='cusRepFeedback.jsp'>Feedback</a>
     <a href='logout.jsp'>Log out</a>
 
