@@ -29,7 +29,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 <br><br>
 
 Look at questions
-<form action = '.jsp', method="POST">
+<form action = 'cusrep-qna.jsp', method="POST">
        Enter the item name for bid: <input type="text" name="itemName"/> <br/>
        <input type="submit" value="Search by Keyword"/>
 </form>
