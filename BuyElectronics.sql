@@ -27,6 +27,7 @@ INSERT INTO users VALUES
 (1, 'admin', 'admin', true, false), 
 (2, 'cusrep', 'cusrep', false, true), 
 (3, 'user', 'passie', false, false), 
+(4, 'corn', 'muffin', false, false),
 (5, 'john','hehe', false, false),
 (6, 'maddy', 'hoho', false, false);
 
@@ -41,7 +42,16 @@ item_memory varchar(5),
 specifications varchar(20));
 
 INSERT INTO electronic_item VALUES
-(1, '205VA', 'monitor', '2020', '20', '128', 'something');
+(1, '205VA', 'monitor', '2020', '20', '128', 'something'),
+(2, '554A', 'monitor', '2018', '16', '128', 'specs'),
+(3, '205VA', 'monitor', '2020', '20', '128', 'something'),
+(4, '205VA', 'monitor', '2020', '20', '128', 'something'),
+(5, '554A', 'monitor', '2018', '16', '128', 'specs'),
+(6, 'macbook1', 'laptop', '2016', '13', '128', 'something'),
+(7, 'macbook2', 'laptop', '2018', '15', '256', 'specs'),
+(8, 'dell1', 'laptop', '2019', '15', '256', 'something'),
+(9, 'macbook2', 'laptop', '2019', '16', '256', 'something'),
+(10, 'dt1', 'desktop', '2018', '16', '128', 'specs');
 
 -- shows active auctions; have to calculate current price
 CREATE TABLE IF NOT EXISTS auction(
@@ -61,8 +71,17 @@ PRIMARY KEY (auction_id, seller_id),
 FOREIGN KEY (seller_id) references users(account_id) on delete restrict on update restrict,
 FOREIGN KEY (item_id) references electronic_item(item_id) on delete restrict on update restrict);
 
-INSERT INTO auction VALUES (
-1, 5, 6, 1, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 127.0, true, NULL);
+INSERT INTO auction VALUES 
+(1, 5, 6, 1, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 200.0, false, 5),
+(2, 4, 6, 2, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 175.0, false, 4),
+(3, 4, 5, 3, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 10000, true, NULL),
+(4, 5, 6, 4, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 400.0, false, 5),
+(5, 3, 4, 5, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 155.0, false, 3),
+(6, 6, 3, 6, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 600.0, false, 6),
+(7, 6, 4, 7, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 1000.0, false, 6),
+(8, 5, 3, 8, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 550.0, false, 5),
+(9, 3, 6, 9, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 750.0, false, 3),
+(10, 4, 6, 10, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 600.0, false, 4);
 
 -- has a history of which auctions ended when and who it was sold to and the price it was sold at
 -- have to calculate auction_active

@@ -151,6 +151,8 @@
     }
     catch(Exception e) {
         out.print(e);
+		response.sendRedirect("admin-report-error.jsp");
+
     }
     con.close();
     session.setAttribute("acctmsg","");
