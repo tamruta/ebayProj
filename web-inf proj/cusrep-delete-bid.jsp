@@ -51,8 +51,6 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
  		ps.setInt(2, seller_id);
         ps.setInt(3, item_id);
         ps.executeUpdate();
-        
-    
 
         rs2 = st.executeQuery("Select max(price), seller_id from viewHistory where item_id = '" + item_id + "' group by seller_id");
         if(rs2.next()){

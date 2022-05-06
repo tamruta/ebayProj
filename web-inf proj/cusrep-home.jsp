@@ -41,10 +41,10 @@ Edit an auction or bid
 </form>
 
 Edit an account
-<form action = 'cusrep-edit-acc-info.jsp', method="post">
-        Username <input type="text" name="username"><br>
-        <input type="submit" value="Search by Keyword">
+<form method="get" action="cusrep-find-acc.jsp">
+  <button type="submit">Continue</button>
 </form>
+
     
     <a href='cusRepFeedback.jsp'>Feedback</a>
     <a href='logout.jsp'>Log out</a>
