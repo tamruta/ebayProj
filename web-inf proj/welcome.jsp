@@ -46,7 +46,48 @@ Put Items up for Sale
 <form action = 'searchItemtype.jsp', method="POST">
        BID ON ITEMS!<br/>
        Search for desired item type(Laptop, Monitor, Desktop): <input type="text" name="itemType"/> <br/>
-       <input type="submit" value="Search by Type:"/>
+       <input type="submit" value="Search by Type"/>
+</form>
+
+<hr size="3">
+
+<form action="search-results.jsp">
+	<b>SEARCH FOR ITEMS</b>
+	<br>
+	<table>
+		<tr>
+			<input type = "checkbox" name = "item-name" /> Item Name:
+			<input type="text" name="item-name"/>
+		</tr>
+		<br>
+		<tr>
+			<input type = "checkbox" name = "sort-by-check" /> Sort by:
+			<select name="sort-by-value">
+				<option value="price">Price</option>
+				<option value="year">Year</option>
+				<option value="type">Item Type</option>
+			</select>
+		</tr>
+		<br>
+		<tr>
+			<input type = "checkbox" name = "item-type-check" /> Item Type:
+			<select name="item-type-value">
+				<option value="monitor">Monitor</option>
+				<option value="laptop">Laptop</option>
+				<option value="desktop">Desktop</option>
+			</select>
+		</tr>
+		<br>
+		<tr>
+			<input type = "checkbox" name = "price-range-check" /> Price Range:
+			<input type="text" name="min-price" size="10"/> to 
+			<input type="text" name="max-price" size="10"/>
+		</tr>
+	</table>
+	<input type="submit" value="Submit">
+
+	<hr size="3">
+
 </form>
 
 <%
