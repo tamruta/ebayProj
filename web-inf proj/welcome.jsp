@@ -90,6 +90,21 @@ Put Items up for Sale
 
 </form>
 
+
+<form action="bid-history-auctions.jsp">
+	<b>VIEW BID HISTORY</b>
+	<input type="submit" value="Submit"/>
+</form>
+
+<hr size="3">
+
+<form action="bid-history-users.jsp">
+	<b>VIEW AUCTIONS ASSOCIATED WITH USER:</b>
+	<input type="text" name="user"/>
+	<input type="submit" value="Submit"/>
+</form>
+
+
 <%
 ApplicationDB db = new ApplicationDB();	
 Class.forName("com.mysql.jdbc.Driver");
