@@ -32,5 +32,46 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 
 
 <%
+    ApplicationDB db = new ApplicationDB();	
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
+    Statement st = con.createStatement();   
+    
+    int q_id = Integer.parseInt(request.getParameter("qid"));  
+    String answer = request.getParameter("answer");
+    
+    ResultSet rs, rs2;
+    
+    rs = st.executeQuery("Select * from qna where q_id= '" + q_id + "'");
+    if (rs.next()) {
+    	rs.previous();
+    	String sql = "update qna set answer = ?, cusrep_id = ? where q_id = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+        
+        String username = session.getAttribute("userID").toString();
+        int cusrep_id = 0;
+        rs2 = st.executeQuery("Select * from users where username = '"+username+"'");
+
+        if(rs2.next())
+          cusrep_id = rs2.getInt("account_id");
+
+        ps.setString(1, answer);
+ 		    ps.setInt(2, cusrep_id);
+        ps.setInt(3, q_id);
+        ps.executeUpdate();
+
+        out.println("Success!<a href='cusrep-home.jsp'>Go Back</a>");
+            
+    }else{
+          out.println("This question does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
+      }   
+    con.close();
+    
+     
+
+
+
+
 }
 %>

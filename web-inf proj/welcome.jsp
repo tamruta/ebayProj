@@ -240,6 +240,11 @@ ResultSet rs = st.executeQuery("SELECT * from automatic_bid where buyer_id =" + 
 	        </table>
 	        <input type="submit" value="Submit value">
         </form>
+
+		Look at Questions and Answers
+		<form method="get" action="qna-show.jsp">
+		  <button type="submit">Continue</button>
+		</form>
 <%
     }
 %>

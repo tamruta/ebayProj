@@ -138,6 +138,10 @@ cusrep_id int,
 FOREIGN KEY(user_id) references users(account_id) on delete restrict on update restrict,
 FOREIGN KEY(cusrep_id) references users(account_id) on delete restrict on update restrict);
 
+INSERT INTO qna VALUES 
+(1, "My bid got deleted?", "You were being an asshole.", 4, 2), 
+(2, "How do I delete my item?", "I have deleted the auction for you.", 5, 2);
+
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'Rootuser!1';
 
 CREATE TABLE IF NOT EXISTS automatic_bid(

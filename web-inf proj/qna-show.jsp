@@ -68,11 +68,10 @@ if (rs.next() == true) {
 
     <br><br>
 
-    Reply To Question
-     <form action = 'cusrep-qna.jsp', method="post">
-        Question Number </td><td><input type="text" name="qid"><br>
-        Answer </td><td><input type="text" name="answer"><br>
-    <input type="submit" value="Reply">
+    Ask A Question
+     <form action = 'qna-ask-question.jsp', method="post">
+        Question </td><td><input type="text" name="question" required><br>
+    <input type="submit" value="Ask">
     </form><br>
 
  <%

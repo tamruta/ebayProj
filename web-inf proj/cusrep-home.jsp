@@ -3,11 +3,14 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%
-    if ((session.getAttribute("userID") == null)) {
+    if (session.getAttribute("userID") == null) {
 %>
-You are not logged in<br/>
-<a href="Users.jsp">Please Login</a>
-<%} else {
+    You are not logged in!
+    <script type="text/javascript">
+      setTimeout(()=> { window.location.href="Users.jsp"; }, 1000);  
+    </script>
+<%
+}else {
 %>
 Welcome <%=session.getAttribute("userID")%> <br><br>
 
@@ -20,16 +23,14 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
       background-color: rgb(211, 208, 208);
       color: white;
       text-align: center;
-    } </style>
-    
-    <div class="footer"> 
+    } </style>    <div class="footer"> 
       <p><a href='welcome.jsp'>Home</a><br><a href='logout.jsp'>Log out</a></p>
     </div>
 
 
-Look at questions
-<form action = 'cusrep-qna.jsp', method="POST">
-       Enter the item name for bid: <input type="text" name="itemName"/> <br/>
+Look at questions (Press Search to see all entries)
+<form action = 'cusrep-find-qna.jsp', method="POST">
+       Enter Question ID <input type="text" name="qid"/> <br/>
        <input type="submit" value="Search by Keyword"/>
 </form>
 
@@ -45,7 +46,6 @@ Edit an account
 </form>
 
 <a href="#" onclick="history.go(-1)">Go Back onclick</a>
-
     <a href='cusRepFeedback.jsp'>Feedback</a>
     <a href='logout.jsp'>Log out</a>
 
