@@ -29,10 +29,8 @@
     try{
         total_earnings.next();
         %>
- 		<table>
- 			<tr>
- 				<td><b>Total Earnings</b></td>
-            <tr>
+		<b>Total Earnings</b>
+ 		<table border = 1>
                 <td><%=total_earnings.getFloat("total")%></td>	
             </tr>
  		</table> 
@@ -40,7 +38,7 @@
         <hr size="3">
         
 		<b>Earnings Per Item</b>
- 		<table>
+ 		<table border="1">
  			<tr>
  				<td>Item</td><td>Earnings</td>
  			</tr>
@@ -56,7 +54,7 @@
          <hr size="3">
 
         <b>Earnings Per Item Type</b>
- 		<table>
+ 		<table border="1">
  			<tr>
  				<td>Item Type</td><td>Earnings</td>
  			</tr>
@@ -72,7 +70,7 @@
          <hr size="3">
 
         <b>Earnings Per End User</b>
- 		<table>
+ 		<table border="1">
  			<tr>
  				<td>Username</td><td>Earnings</td>
  			</tr>
@@ -88,7 +86,7 @@
          <hr size="3">
 
 		<b>Best Selling Items</b>
- 		<table>
+ 		<table border="1">
  			<tr>
  				<td>Item</td><td>Number Sold</td><td>Total Earnings</td>
  			</tr>
@@ -105,7 +103,7 @@
          <hr size="3">
 
 		<b>Top Buyers</b>
- 		<table>
+ 		<table border="1">
  			<tr>
  				<td>Username</td><td>Number of Purchases</td><td>Total Spent</td>
  			</tr>
@@ -118,23 +116,6 @@
  					</tr>
  				<%}%>
  		</table>
-
-         <style> .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            font-size: 30;
-            background-color: rgb(211, 208, 208);
-            color: white;
-            text-align: center;
-          } </style>
-          
-          <div class="footer"> 
-            <p><a href='admin.jsp'>Home</a><br><a href='logout.jsp'>Log out</a></p>
-          </div>
-      
-      <br><br>
 
          <hr size="3">
 
