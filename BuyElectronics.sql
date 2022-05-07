@@ -88,7 +88,6 @@ INSERT INTO auction VALUES
 -- if active, refer to the auction page, if inactive then current price is the last price so needs no reference
 CREATE TABLE IF NOT EXISTS viewHistory(
 history_id int UNIQUE,
-buyer_id int,
 seller_id int, 
 user_account_id int, 
 auction_id int, 
@@ -97,16 +96,16 @@ end_date date,
 price float,
 auction_active bool,
 PRIMARY KEY(history_id, user_account_id, seller_id, auction_id, item_id), 
-FOREIGN KEY(auction_id) references auction(auction_id) on delete restrict on update restrict,
-FOREIGN KEY(seller_id) references auction(seller_id) on delete restrict on update restrict,
-FOREIGN KEY(user_account_id) references users(account_id) on delete restrict on update restrict,
-FOREIGN KEY(item_id) references electronic_item(item_id) on delete restrict on update restrict);
+FOREIGN KEY(auction_id) references auction(auction_id) on delete cascade on update restrict,
+FOREIGN KEY(seller_id) references auction(seller_id) on delete cascade on update restrict,
+FOREIGN KEY(user_account_id) references users(account_id) on delete cascade on update restrict,
+FOREIGN KEY(item_id) references electronic_item(item_id) on delete cascade on update restrict);
 
 INSERT INTO viewHistory VALUES 
-(12, 4, 5, 2, 1, 3, '2022-05-05', 10000, true),
-(10, 4, 5, 2, 1, 3, '2022-05-05', 5000, true),
-(11, 4, 5, 2, 1, 3, '2022-05-05', 7500, true),
-(9, 4, 5, 2, 1, 3, '2022-05-05', 1000, true);
+(12, 4, 5, 2, 1, '2022-05-05', 10000, true),
+(10, 4, 5, 2, 1, '2022-05-05', 5000, true),
+(11, 4, 5, 2, 1, '2022-05-05', 7500, true),
+(9, 4, 5, 2, 1, '2022-05-05', 1000, true);
 
 
 -- alert gets active for a certain account_id to be alerted about item_id if alert_active is true
@@ -116,17 +115,17 @@ account_id int,
 item_id int, 
 alert_active bool default false,
 alert_type varchar(100),
-PRIMARY KEY(alert_id,account_id),
-FOREIGN KEY(account_id) references users(account_id) on delete restrict on update restrict,
-FOREIGN KEY(item_id) references electronic_item(item_id) on delete cascade on update cascade);
+PRIMARY KEY(alert_id),
+FOREIGN KEY(account_id) references users(account_id),
+FOREIGN KEY(item_id) references electronic_item(item_id));
 
 -- have not added to this, don't know what this would be used for
 CREATE TABLE IF NOT EXISTS search(
 account_id int, 
 item_id int, 
 PRIMARY KEY(account_id),
-FOREIGN KEY(account_id) references users(account_id) on delete restrict on update restrict,
-FOREIGN KEY (item_id) references electronic_item(item_id) on delete cascade on update cascade);
+FOREIGN KEY(account_id) references users(account_id),
+FOREIGN KEY (item_id) references electronic_item(item_id));
 
 -- a table to store questions and answers
 CREATE TABLE IF NOT EXISTS qna(
