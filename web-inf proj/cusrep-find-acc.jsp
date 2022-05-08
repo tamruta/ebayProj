@@ -82,7 +82,7 @@ if (rs.next() == true) {
     
  <%
 }else {
-    out.println("Invalid Search <a href='cusrep-home.jsp'>Go Back</a>");
+    out.println("Invalid Search");
 }
 con.close();
 %>

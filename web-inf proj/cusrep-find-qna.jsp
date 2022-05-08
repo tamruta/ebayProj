@@ -92,12 +92,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 
 <%
     }else {
-      out.println("Invalid Search <a href='cusrep-home.jsp'>Go Back</a>");
+      out.println("Invalid Search!");
     }
 
     con.close();
-%>
-    <a href="#" onclick="history.go(-1)">Go Back onclick</a>
-<%
+
+out.println("<a href='cusrep-home.jsp'>Go Back</a>");
   }
 %>

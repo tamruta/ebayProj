@@ -44,10 +44,11 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
         PreparedStatement ps = con.prepareStatement(sql2);
         ps.setInt(1, item_id);
         ps.executeUpdate();
-        
-    }else {
-        out.println("This item does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
+
+    } else{
+        out.println("Not successful!");
     }
+    
     rs2 = st.executeQuery("Select * from auction where item_id = '" + item_id + "'");
 	if (rs2.next()) {
     	
@@ -55,9 +56,8 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, item_id);
         ps.executeUpdate();
-        
-    }else {
-        out.println("This item does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
+    }else{
+        out.println("Not successful!");
     }
     
     rs1 = st.executeQuery("Select * from electronic_item where item_id= '" + item_id + "'");
@@ -67,13 +67,14 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
         PreparedStatement ps = con.prepareStatement(sql3);
         ps.setInt(1, item_id);
         ps.executeUpdate();
-        
-        
-    }else {
-        out.println("This item does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
+        out.println("Success!");
+
+    }else{
+        out.println("Not successful!");
     }
-    
-    out.println("Success! <a href='cusrep-home.jsp'>Go Back</a>");
+
+    out.println("<a href='cusrep-home.jsp'>Go Back</a>");
+
     con.close();
 %>
   

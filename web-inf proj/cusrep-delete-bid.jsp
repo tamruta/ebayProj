@@ -70,14 +70,14 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
         }
         
  		
-        out.println("Successful! <a href='cusrep-home.jsp'>Customer Rep Home</a>");
+        out.println("Successful!");
     }else {
-        out.println("This bid does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
+        out.println("This bid does not exist!");
     } 
     
     con.close();
 %>			
-  
+<a href='cusrep-home.jsp'>Go Back</a>
 <%
 }
 %>

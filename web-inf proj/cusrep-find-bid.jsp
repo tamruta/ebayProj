@@ -34,11 +34,16 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 	Class.forName("com.mysql.jdbc.Driver");
 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
 	Statement st = con.createStatement();
-    
+	Statement st2 = con.createStatement();
+	Statement st3 = con.createStatement();
+	Statement st4 = con.createStatement();
+
     String item = request.getParameter("auctionid");   
         
 	
-    ResultSet rs;
+    ResultSet rs, rs2, rs3, rs4;
+	String item_name = "", buyer_name ="", seller_name="";
+
     rs = st.executeQuery("Select * from viewHistory where auction_id like '%" + item + "%'");
     if (rs.next() == true) {
         session.setAttribute("itemName", item); //delete?
@@ -50,21 +55,39 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
  				<td>Auction ID</td>
 				<td>Bid ID</td>
  				<td>Item ID</td>
+				<td>Item Name</td>
  				<td>Current Price</td>
-				<td>Seller</td>
-				<td>Buyer</td>
+				<td>Seller ID</td>
+				<td>Seller Name</td>
+				<td>Buyer ID</td>
+				<td>Buyer Name</td>
  				
  			</tr>
  			<%
  			rs.previous();
- 			while(rs.next()){%>
+ 			while(rs.next()){
+				rs2 = st2.executeQuery("Select * from electronic_item where item_id = "+rs.getInt("item_id"));
+				rs3 = st3.executeQuery("Select * from users where account_id = "+rs.getInt("seller_id"));
+				rs4 = st4.executeQuery("Select * from users where account_id = "+rs.getInt("user_account_id"));
+				if(rs2.next())
+				  item_name = rs2.getString("item_type");
+				if(rs3.next())
+				  seller_name = rs3.getString("username");
+				if(rs4.next())
+				  buyer_name = rs4.getString("username");
+				 
+
+			%>
  				<tr>
  					<td><%=rs.getInt("auction_id")%></td>
 					<td><%=rs.getInt("history_id")%></td>
  					<td><%=rs.getInt("item_id")%></td>
+					<td><%=item_name%></td>
  					<td><%=rs.getFloat("price")%></td>
 					<td><%=rs.getInt("seller_id")%></td>
- 					<td><%=rs.getInt("user_account_id")%></td>			
+					<td><%=seller_name%></td>
+ 					<td><%=rs.getInt("user_account_id")%></td>	
+					<td><%=buyer_name%></td>		
  				</tr>
  			<%}%>
 		</table>
@@ -87,12 +110,12 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 		</form>
  	<%
     }else {
-        out.println("Invalid Search <a href='cusrep-home.jsp'>Go Back</a>");
+        out.println("Invalid Search! ");
     }
     
     con.close();
 %>
-<a href="#" onclick="history.go(-1)">Go Back onclick</a>
+<a href="cusrep-home.jsp">Go Back</a>
 <%
 }
 %>
