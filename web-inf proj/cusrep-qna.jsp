@@ -32,45 +32,26 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 ApplicationDB db = new ApplicationDB();	
 Class.forName("com.mysql.jdbc.Driver");
 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
+
 Statement st = con.createStatement();
-String item = request.getParameter("auctionid");   
+int q_id = Integer.parseInt(request.getParameter("qid")); 
+String answer = request.getParameter("answer");   
+
     
 ResultSet rs;
-rs = st.executeQuery("Select * from qna");
-if (rs.next() == true) {
-    %>
-     <table border="2" cellpadding="5">
-         <tr>
-             <td>Question Number</td>
-            <td>Question</td>
-             <td>Answer</td>
-             <td>Posted by</td>
-            <td>Answered by</td>
-             
-         </tr>
-         <%
-         rs.previous();
-         while(rs.next()){%>
-             <tr>
-                <td><%=rs.getInt("q_id")%></td>
-                <td><%=rs.getString("question")%></td>
-                <td><%=rs.getString("answer")%></td>
-                <td><%=rs.getInt("user_id")%></td>
-                <td><%=rs.getInt("cusrep_id")%></td>
-             </tr>
-         <%}%>
-    </table>
-    
-
-    <br><br>
-
-    Reply To Question
-     <form action = 'cusrep-qna.jsp', method="post">
-        Question Number </td><td><input type="text" name="qid"><br>
-        Answer </td><td><input type="text" name="answer"><br>
-    <input type="submit" value="Reply">
-    </form><br>
-
+rs = st.executeQuery("select * from qna where q_id=" + q_id);
+if (rs.next()) {
+        String sql2 = "update qna set answer = ? where q_id = ?";
+        PreparedStatement ps2 = con.prepareStatement(sql2);
+        ps2.setString(1, answer);
+        ps2.setInt(2, q_id);
+        ps2.executeUpdate();
+        out.println("Success!<a href='cusrep-home.jsp'>Go Back</a>");
+    }	
+            
+} else {
+    out.println("Invalid question <a href='cusrep-home.jsp'>try again</a>");
+}
  <%
 }else {
     out.println("Invalid Search <a href='cusrep-home.jsp'>Go Back</a>");

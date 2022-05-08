@@ -75,6 +75,10 @@ if (rs.next() == true) {
     <input type="submit" value="Reply">
     </form><br>
 
+                
+    } else {
+        out.println("Invalid username or password <a href='cusrep-home.jsp'>try again</a>");
+    }
  <%
 }else {
     out.println("Invalid Search <a href='cusrep-home.jsp'>Go Back</a>");

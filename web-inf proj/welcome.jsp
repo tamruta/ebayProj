@@ -26,6 +26,12 @@ Welcome <%=session.getAttribute("userID")%><br/>
       <p><a href='welcome.jsp'>Home</a><br><a href='logout.jsp'>Log out</a></p>
     </div>
 
+	
+	Look at questions (Press Search to see all entries)
+	<form action = 'qna-show.jsp', method="POST">
+		   <input type="submit" value="Continue"/>
+	</form>	
+	
 Put Items up for Sale
 <form action = 'auctionItem.jsp', method="POST">
 		Model Number: <input type="text" name="model_number"/> <br/>
@@ -251,11 +257,6 @@ ResultSet rs = st.executeQuery("SELECT * from automatic_bid where buyer_id =" + 
 	        <input type="submit" value="Submit value">
         </form>
 
-		Look at questions (Press Search to see all entries)
-		<form action = 'qna-show.jsp', method="POST">
-			   Enter Question ID <input type="text" name="qid"/> <br/>
-			   <input type="submit" value="Search by Keyword"/>
-		</form>	
 <%
     }
 %>

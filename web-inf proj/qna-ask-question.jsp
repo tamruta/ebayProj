@@ -58,7 +58,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
             user_id = rs2.getInt("account_id");
 
         ps.setInt(1, q_id);
- 		ps.setString(2, question);
+ 		    ps.setString(2, question);
         ps.setInt(3, user_id);
         ps.executeUpdate();
 

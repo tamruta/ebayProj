@@ -33,10 +33,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 ApplicationDB db = new ApplicationDB();	
 Class.forName("com.mysql.jdbc.Driver");
 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
-Statement st = con.createStatement();
-
-String item = request.getParameter("auctionid");   
-    
+Statement st = con.createStatement();    
 
 ResultSet rs;
 rs = st.executeQuery("Select * from qna");
