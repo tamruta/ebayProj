@@ -74,7 +74,7 @@ FOREIGN KEY (item_id) references electronic_item(item_id) on delete cascade on u
 INSERT INTO auction VALUES 
 (1, 5, 6, 1, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 200.0, false, 5),
 (2, 4, 6, 2, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 175.0, false, 4),
-(3, 4, 5, 3, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 10000, true, NULL),
+(3, 4, 5, 3, '2022-05-12', 100.0, 150.0, 10.0, 200.0, 10000, true, NULL),
 (4, 5, 6, 4, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 400.0, false, 5),
 (5, 3, 4, 5, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 155.0, false, 3),
 (6, 6, 3, 6, '2022-05-05', 100.0, 150.0, 10.0, 200.0, 600.0, false, 6),
@@ -104,8 +104,8 @@ FOREIGN KEY(item_id) references electronic_item(item_id) on delete cascade on up
 INSERT INTO viewHistory VALUES 
 (12, 4, 5, 2, 1, '2022-05-05', 10000, true),
 (10, 4, 3, 2, 1, '2022-05-05', 5000, true),
-(11, 4, 4, 2, 1, '2022-05-05', 7500, true),
-(9, 4, 5, 2, 1, '2022-05-05', 1000, true);
+(11, 4, 2, 2, 1, '2022-05-05', 7500, true),
+(9, 4, 1, 2, 1, '2022-05-05', 1000, true);
 
 
 -- alert gets active for a certain account_id to be alerted about item_id if alert_active is true
@@ -116,8 +116,8 @@ item_id int,
 alert_active bool default false,
 alert_type varchar(100),
 PRIMARY KEY(alert_id),
-FOREIGN KEY(account_id) references users(account_id) on delete cascade on update cascade,
-FOREIGN KEY(item_id) references electronic_item(item_id)on delete cascade on update cascade);
+FOREIGN KEY(account_id) references users(account_id),
+FOREIGN KEY(item_id) references electronic_item(item_id));
 
 -- have not added to this, don't know what this would be used for
 CREATE TABLE IF NOT EXISTS search(
@@ -154,6 +154,3 @@ PRIMARY KEY (auction_id, buyer_id, seller_id),
 FOREIGN KEY (buyer_id) references users(account_id) on delete cascade on update cascade,
 FOREIGN KEY (seller_id) references users(account_id) on delete cascade on update cascade,
 FOREIGN KEY (item_id) references electronic_item(item_id) on delete restrict on update restrict);
-
-
-select * from qna where question like '%bid%' or answer like '%bid%';
