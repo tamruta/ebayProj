@@ -32,4 +32,4 @@ Pages:
 * view history page
 * QnA page: see questions and answers
 
-NOTE:Remember to change the password in ApplicationDB.java file under WEB-INF and in the check-account-login page.
+NOTE: Remember to change the password in ApplicationDB.java file under WEB-INF and in the check-account-login page.
