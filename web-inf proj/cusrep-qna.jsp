@@ -48,10 +48,7 @@ if (rs.next()) {
         ps2.executeUpdate();
         out.println("Success!<a href='cusrep-home.jsp'>Go Back</a>");
     }	
-            
-} else {
-    out.println("Invalid question <a href='cusrep-home.jsp'>try again</a>");
-}
+  
  <%
 }else {
     out.println("Invalid Search <a href='cusrep-home.jsp'>Go Back</a>");
