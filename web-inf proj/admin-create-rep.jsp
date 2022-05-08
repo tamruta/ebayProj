@@ -2,6 +2,16 @@
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%
+    if ((session.getAttribute("userID") == null)) {
+%>
+    You are not logged in!
+    <script type="text/javascript">
+        setTimeout(()=> { window.location.href="Users.jsp"; }, 1000);  
+    </script>
+<%} else {
+%>
+Welcome <%=session.getAttribute("userID")%> <br><br>
 
 <%
     ApplicationDB db = new ApplicationDB();	
@@ -39,5 +49,5 @@
         response.sendRedirect("admin.jsp");
     }
     
-    
+} 
 %>

@@ -5,8 +5,10 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%
 if ((session.getAttribute("userID") == null)) {
 %>
-You are not logged in<br/>
-<a href="Users.jsp">Please Login</a>
+    You are not logged in!
+    <script type="text/javascript">
+        setTimeout(()=> { window.location.href="Users.jsp"; }, 1000);  
+    </script>
 <%} else {
 %>
 Welcome <%=session.getAttribute("userID")%> <br><br>
@@ -84,7 +86,7 @@ if (rs.next() == true) {
 }
 con.close();
 %>
-<a href="#" onclick="history.go(-1)">Go Back onclick</a>
+<a href="cusrep-home.jsp">Go Back</a>
 <%
 }
 %>

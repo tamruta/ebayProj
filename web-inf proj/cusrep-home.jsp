@@ -45,8 +45,6 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
       <button type="submit">Continue</button>
     </form>
 
-    <a href="#" onclick="history.go(-1)">Go Back onclick</a>
-
 <%
   }
 %>
