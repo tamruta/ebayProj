@@ -24,8 +24,6 @@ Pages:
 * registrationeror:
 * SalesReport: creates a sales report
 * welcome: access to create, delete or checkout items
-
-need to add!
 * admin page: link to sales report, view history, seeing the winner, QnA, cust rep
 * customer rep page: delete bid and answers questions
 * alert page
@@ -34,5 +32,4 @@ need to add!
 * view history page
 * QnA page: see questions and answers
 
-Remember to change the password in ApplicationDB.java file under WEB-INF and in the check-account-login page.
-Added footer to pages
+NOTE:Remember to change the password in ApplicationDB.java file under WEB-INF and in the check-account-login page.
