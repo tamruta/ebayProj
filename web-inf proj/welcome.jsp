@@ -250,6 +250,12 @@ ResultSet rs = st.executeQuery("SELECT * from automatic_bid where buyer_id =" + 
 	        </table>
 	        <input type="submit" value="Submit value">
         </form>
+
+		Look at questions (Press Search to see all entries)
+		<form action = 'qna-show.jsp', method="POST">
+			   Enter Question ID <input type="text" name="qid"/> <br/>
+			   <input type="submit" value="Search by Keyword"/>
+		</form>	
 <%
     }
 %>

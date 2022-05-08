@@ -35,7 +35,7 @@ Class.forName("com.mysql.jdbc.Driver");
 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
 Statement st = con.createStatement();
 
-String item = request.getParameter("auctionid");   
+String q_id = request.getParameter("q_id");   
     
 
 ResultSet rs;
