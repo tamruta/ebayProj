@@ -4,9 +4,16 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%
     if (session.getAttribute("userID") == null) {
-%>
-Welcome <%=session.getAttribute("userID")%> <br><br>
-
+      %>
+          You are not logged in!
+          <script type="text/javascript">
+            setTimeout(()=> { window.location.href="Users.jsp"; }, 1000);  
+          </script>
+      <%
+      }else {
+      %>
+      Welcome <%=session.getAttribute("userID")%> <br><br>
+      
 <style> .footer {
   position: fixed;
   left: 0;
@@ -29,8 +36,6 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyEle
 Statement st = con.createStatement();
 int q_id = Integer.parseInt(request.getParameter("qid")); 
 String answer = request.getParameter("answer");   
-out.println("qid "+ q_id+" answer "+answer);
-
 
     
 ResultSet rs, rs2;
@@ -54,10 +59,6 @@ if (rs.next()) {
     out.println("Invalid Search <a href='cusrep-home.jsp'>Go Back</a>");
 }
 con.close();
-%>
-<a href="#" onclick="history.go(-1)">Go Back onclick</a>
-<%
-}else{
-  out.println("You are not logged in!");
-  
+
+      }  
 %>
