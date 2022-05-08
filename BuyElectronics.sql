@@ -103,8 +103,8 @@ FOREIGN KEY(item_id) references electronic_item(item_id) on delete cascade on up
 
 INSERT INTO viewHistory VALUES 
 (12, 4, 5, 2, 1, '2022-05-05', 10000, true),
-(10, 4, 5, 2, 1, '2022-05-05', 5000, true),
-(11, 4, 5, 2, 1, '2022-05-05', 7500, true),
+(10, 4, 3, 2, 1, '2022-05-05', 5000, true),
+(11, 4, 4, 2, 1, '2022-05-05', 7500, true),
 (9, 4, 5, 2, 1, '2022-05-05', 1000, true);
 
 
