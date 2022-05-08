@@ -64,12 +64,12 @@ if (rs.next() == true) {
 
     
     <form action="cusrep-edit-acc-info.jsp" method="post">
-        Username <input type="text" name="un"><br>
-        Password <input type="text" name="pw"><br>
+        Username <input type="text" name="un" required><br>
+        Password <input type="text" name="pw" required><br>
         New Username <input type="text" name="newun"><br>
         New Password <input type="text" name="newpw"><br>
         <label for="do-this">Action to perform</label>
-        <select name="perform">
+        <select name="perform" required>
         <option value="del-acc">Delete Account</option>
         <option value="chn-pw">Change Password</option>
         <option value="chn-usn">Change Username</option>

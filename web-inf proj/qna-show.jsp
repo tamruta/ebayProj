@@ -33,9 +33,12 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 ApplicationDB db = new ApplicationDB();	
 Class.forName("com.mysql.jdbc.Driver");
 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
-Statement st = con.createStatement();    
+Statement st = con.createStatement();   
+Statement st2 = con.createStatement();    
+Statement st3 = con.createStatement();    
 
-ResultSet rs;
+
+ResultSet rs, rs2, rs3;
 rs = st.executeQuery("Select * from qna");
 
 if (rs.next() == true) {
@@ -51,13 +54,27 @@ if (rs.next() == true) {
          </tr>
          <%
          rs.previous();
-         while(rs.next()){%>
+         while(rs.next()){
+              int user_id = rs.getInt("user_id");
+              int cusrep_id = rs.getInt("cusrep_id");
+              String username = "";
+              String cusrep = "";
+
+              rs2 = st2.executeQuery("Select * from users where account_id = "+user_id);
+              rs3 = st3.executeQuery("Select * from users where account_id = "+cusrep_id);
+              if(rs2.next())
+                username = rs2.getString("username");
+              if(rs3.next())
+                cusrep = rs3.getString("username");
+              else 
+                cusrep = "";
+%>
              <tr>
                 <td><%=rs.getInt("q_id")%></td>
                 <td><%=rs.getString("question")%></td>
                 <td><%=rs.getString("answer")%></td>
-                <td><%=rs.getInt("user_id")%></td>
-                <td><%=rs.getInt("cusrep_id")%></td>
+                <td><%=username%></td>
+                <td><%=cusrep%></td>
              </tr>
          <%}%>
     </table>

@@ -33,12 +33,14 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
     ApplicationDB db = new ApplicationDB();	
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
-    Statement st = con.createStatement();
-
+    Statement st = con.createStatement();   
+    Statement st2 = con.createStatement();    
+    Statement st3 = con.createStatement();    
+    
+    
+    ResultSet rs, rs2, rs3;
     String q_id = request.getParameter("q_id");   
 
-
-    ResultSet rs;
     rs = st.executeQuery("Select * from qna");
 
     if (rs.next() == true) {
@@ -52,24 +54,38 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
           <td>Answered by</td>
         </tr>
 <%
-        rs.previous();
-        while(rs.next()){%>
+      rs.previous();
+      while(rs.next()){
+           int user_id = rs.getInt("user_id");
+           int cusrep_id = rs.getInt("cusrep_id");
+           String username = "";
+           String cusrep = "";
+
+           rs2 = st2.executeQuery("Select * from users where account_id = "+user_id);
+           rs3 = st3.executeQuery("Select * from users where account_id = "+cusrep_id);
+           if(rs2.next())
+             username = rs2.getString("username");
+           if(rs3.next())
+             cusrep = rs3.getString("username");
+           else 
+             cusrep = "";
+%>
           <tr>
-            <td><%=rs.getInt("q_id")%></td>
-            <td><%=rs.getString("question")%></td>
-            <td><%=rs.getString("answer")%></td>
-            <td><%=rs.getInt("user_id")%></td>
-            <td><%=rs.getInt("cusrep_id")%></td>
+             <td><%=rs.getInt("q_id")%></td>
+             <td><%=rs.getString("question")%></td>
+             <td><%=rs.getString("answer")%></td>
+             <td><%=username%></td>
+             <td><%=cusrep%></td>
           </tr>
-<%}%>
+      <%}%>
       </table>
 
       <br><br>
 
       Reply To Question
       <form action = 'cusrep-qna.jsp', method="post">
-        Question Number </td><td><input type="text" name="qid"><br>
-        Answer </td><td><input type="text" name="answer"><br>
+        Question Number </td><td><input type="text" name="qid" required><br>
+        Answer </td><td><input type="text" name="answer" required><br>
         <input type="submit" value="Reply">
       </form><br>
 

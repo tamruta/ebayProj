@@ -11,6 +11,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 		</script>
 <%	} else {
 %>
+
 		Welcome <%=session.getAttribute("userID")%>
 		<br><b><br>
 		<style> 

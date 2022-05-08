@@ -70,16 +70,15 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 
 		Delete Bid
  		<form action = 'cusrep-delete-bid.jsp', method="post">
-	    	Enter Bid ID of bid to delete </td><td><input type="text" name="bidid"><br>
-			Enter Item ID of bid to delete </td><td><input type="text" name="itemid"><br>
-	    	Enter Seller ID </td><td><input type="text" name="sellerid"><br>
+	    	Enter Bid ID of bid to delete </td><td><input type="text" name="bidid" required><br>
+	    	Enter Seller ID </td><td><input type="text" name="sellerid" required><br>
 	    	Enter Buyer ID </td><td><input type="text" name="buyerid"><br>
         <input type="submit" value="Delete Bid">
     	</form><br>
 
 		Delete Item/Auction
 		<form action = 'cusrep-delete-auction.jsp', method="post">
-			Enter Item ID</td><td><input type="text" name="id"><br>
+			Enter Item ID</td><td><input type="text" name="id" required><br>
 			<input type="submit" value="Delete Item">
 		</form>
  	<%
