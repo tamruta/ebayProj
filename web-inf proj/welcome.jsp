@@ -5,12 +5,14 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%
 	if ((session.getAttribute("userID") == null)) {
 %>
-		You are not logged in<br/>
-		<a href="Users.jsp">Please Login</a>
+		You are not logged in!
+		<script type="text/javascript">
+			setTimeout(()=> { window.location.href="Users.jsp"; }, 1000);  
+		</script>
 <%	} else {
 %>
 		Welcome <%=session.getAttribute("userID")%>
-		<br>
+		<br><b><br>
 		<style> 
 			.footer {
 				position: fixed;
@@ -31,6 +33,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 			<p><a href='welcome.jsp'>Home</a><br><a href='logout.jsp'>Log out</a></p>
 		</div>
 
+		<hr size="3">
 
 		<b>PUT UP ITEMS FOR SALE</b>
 		<form action = 'auctionItem.jsp', method="POST">
@@ -207,56 +210,56 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 			ps7.setInt(4,auction_id);
 			ps7.executeUpdate();
 		}
-%>
-
-
-
-		<%   
+   
 		ResultSet at;
 		at = st8.executeQuery("select * from alert where alert_active = true and account_id = " + (Integer)session.getAttribute("account_num") );
+
 		if (at.next() == true) { 
-		%>
-		<table border="1">
-		<tr><th>alert ID</th><th>Account ID</th><th>Item ID</th><th>Alert _Type</th></tr>
-
-		<%
-		at.previous();
-		while(at.next()){%>
-		<%
-		%>
-		<tr>
+			%>
+			<table border="1">
+			<tr><th>alert ID</th>
+				<th>Account ID</th>
+				<th>Item ID</th>
+				<th>Alert _Type</th>
+			</tr>
+			<%
+			at.previous();
+			while(at.next()){
+%>
 				<tr><td><%=at.getInt("alert_id")%></td>
-				<td><%=at.getInt("account_id")%></td>
-				<td><%=at.getInt("item_id")%></td>
-				<td><%=at.getString("alert_type")%></td><tr>
+					<td><%=at.getInt("account_id")%></td>
+					<td><%=at.getInt("item_id")%></td>
+					<td><%=at.getString("alert_type")%></td>
+				</tr>
+<%
+			}
+%>
 
-		<%}%>
+			</table>   
 
-		</table>   
-
-		<form action = 'clearAlerts.jsp', method="post">
-		<input type="submit" value="Clear Alerts">
-		</form>  
-		<%
-		}else {
-		out.println("You have no alerts right now");
+			<form action = 'clearAlerts.jsp', method="post">
+				<input type="submit" value="Clear Alerts">
+			</form>  
+<%
+		} else {
+			out.println("You have no alerts right now");
 		}
-
-
-
-		%>
+%>
 		<form action = 'createAlerts.jsp', method="post">
-		<table>
-		<tr>
-		<td>Create an alert for when a type of item becomes available(Laptop, Desktop or Monitor)</td><td><input type="text" name="id"></td>
-		</tr>
-		</table>
-		<input type="submit" value="Submit value">
+			<table>
+			<tr>
+				<td>Create an alert for when a type of item becomes available(Laptop, Desktop or Monitor)</td>
+				<td><input type="text" name="id"></td>
+			</tr>
+			</table>
+			<input type="submit" value="Submit value">
 		</form>
 
-		Look at questions (Press Search to see all entries)
+		<hr size="3">
+
+		<b>LOOK AT QUESTIONS (PRESS CONTINUE TO SEE ALL ENTRIES</b>
 		<form action = 'qna-show.jsp', method="POST">
-		<input type="submit" value="Continue"/>
+			<input type="submit" value="Continue"/>
 		</form>	
 
 <%
