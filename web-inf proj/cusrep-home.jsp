@@ -46,9 +46,6 @@ Edit an account
 </form>
 
 <a href="#" onclick="history.go(-1)">Go Back onclick</a>
-    <a href='cusRepFeedback.jsp'>Feedback</a>
-    <a href='logout.jsp'>Log out</a>
-
     
 <%
 }
