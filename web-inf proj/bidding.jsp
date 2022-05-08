@@ -18,7 +18,7 @@ Statement stmt = con.createStatement();
     float buyer_bid = Float.parseFloat(bid);
     
     ResultSet rs;
-    rs = st.executeQuery("Select * from auction where item_id= '" + item_id +"'");
+    rs = st.executeQuery("Select * from auction where item_id=" + id );
    	
     if (!rs.next()) {
 		out.println("Item does not exist");
@@ -30,10 +30,10 @@ Statement stmt = con.createStatement();
     int auction_id = rs.getInt("auction_id");
     int temp_item_id = rs.getInt("item_id");
 	String closing_date = rs.getString("closing_date");
-    Float current_price = rs.getFloat("current_price");
-    Float max_price = rs.getFloat("bid_limit");
+    float current_price = rs.getFloat("current_price");
+    float max_price = rs.getFloat("bid_limit");
     Boolean active = rs.getBoolean("auction_active");
-    Float seller_increment = rs.getFloat("increment");
+    float seller_increment = rs.getFloat("increment");
     float newBid = current_price + seller_increment;
     
     if(buyer_bid < newBid){
@@ -70,17 +70,22 @@ Statement stmt = con.createStatement();
     	 ps.executeUpdate();
     }
 
-    String alert = "INSERT INTO alert VALUES(?,?,?,?,?)";
-	PreparedStatement al = con.prepareStatement(alert);
-	ResultSet aid = stmt.executeQuery("SELECT MAX(alert_id) as ID from alert");
-	aid.next();
-	int alertID = aid.getInt("ID") + 1;
-	al.setInt(1,alertID);
-	al.setInt(2,current_buyer);
-	al.setInt(3,temp_item_id);
-	al.setBoolean(4,true);
-	al.setString(5,"outbid");
-	al.executeUpdate();
+    try{
+    	 String alert = "INSERT INTO alert VALUES(?,?,?,?,?)";
+    		PreparedStatement al = con.prepareStatement(alert);
+    		ResultSet aid = stmt.executeQuery("SELECT MAX(alert_id) as ID from alert");
+    		aid.next();
+    		int alertID = aid.getInt("ID") + 1;
+    		al.setInt(1,alertID);
+    		al.setInt(2,current_buyer);
+    		al.setInt(3,temp_item_id);
+    		al.setBoolean(4,true);
+    		al.setString(5,"outbid");
+    		al.executeUpdate();
+    }
+   catch(Exception e){
+	   
+   }
     
    
     	ResultSet rs4 = st.executeQuery("SELECT MAX(history_id) as ID from viewHistory");

@@ -43,25 +43,24 @@ Put Items up for Sale
        <input type="submit" value="Post Item"/>
 </form>
 
-<form action = 'searchItemtype.jsp', method="POST">
-       BID ON ITEMS!<br/>
-       Search for desired item type(Laptop, Monitor, Desktop): <input type="text" name="itemType"/> <br/>
-       <input type="submit" value="Search by Type"/>
-</form>
 
 <hr size="3">
 
-<form action="search-results.jsp">
+<form action="searchItemtype.jsp">
 	<b>SEARCH FOR ITEMS</b>
 	<br>
 	<table>
 		<tr>
-			<input type = "checkbox" name = "item-name" /> Item Name:
-			<input type="text" name="item-name"/>
+			<input type = "checkbox" name = "item-name" value = "true"/> Item Name:
+			<input type="text" name="model-name"/>
 		</tr>
 		<br>
 		<tr>
-			<input type = "checkbox" name = "sort-by-check" /> Sort by:
+			<input type = "checkbox" name = "similar" value = "true"/> Similar Items:
+		</tr>
+		<br>
+		<tr>
+			<input type = "checkbox" name = "sort-by-check" value = "true" /> Sort by:
 			<select name="sort-by-value">
 				<option value="price">Price</option>
 				<option value="year">Year</option>
@@ -70,7 +69,7 @@ Put Items up for Sale
 		</tr>
 		<br>
 		<tr>
-			<input type = "checkbox" name = "item-type-check" /> Item Type:
+			<input type = "checkbox" name = "item-type-check" value = "true" /> Item Type:
 			<select name="item-type-value">
 				<option value="monitor">Monitor</option>
 				<option value="laptop">Laptop</option>
@@ -79,7 +78,7 @@ Put Items up for Sale
 		</tr>
 		<br>
 		<tr>
-			<input type = "checkbox" name = "price-range-check" /> Price Range:
+			<input type = "checkbox" name = "price-range-check" value = "true"/> Price Range:
 			<input type="text" name="min-price" size="10"/> to 
 			<input type="text" name="max-price" size="10"/>
 		</tr>
@@ -89,7 +88,6 @@ Put Items up for Sale
 	<hr size="3">
 
 </form>
-
 
 <form action="bid-history-auctions.jsp">
 	<b>VIEW BID HISTORY</b>
@@ -104,7 +102,6 @@ Put Items up for Sale
 	<input type="submit" value="Submit"/>
 </form>
 
-
 <%
 ApplicationDB db = new ApplicationDB();	
 Class.forName("com.mysql.jdbc.Driver");
@@ -113,7 +110,6 @@ Statement st = con.createStatement();
 Statement st2 = con.createStatement();
 Statement st8 = con.createStatement();
 Statement stmt = con.createStatement();
-
 int current_user = (Integer)session.getAttribute("account_num");
 ResultSet rs = st.executeQuery("SELECT * from automatic_bid where buyer_id =" + current_user);
 	
@@ -208,7 +204,6 @@ ResultSet rs = st.executeQuery("SELECT * from automatic_bid where buyer_id =" + 
 			
 		
 	}
-
 %>
 	
 	
@@ -255,11 +250,6 @@ ResultSet rs = st.executeQuery("SELECT * from automatic_bid where buyer_id =" + 
 	        </table>
 	        <input type="submit" value="Submit value">
         </form>
-
-		Look at Questions and Answers
-		<form method="get" action="qna-show.jsp">
-		  <button type="submit">Continue</button>
-		</form>
 <%
     }
 %>

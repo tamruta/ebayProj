@@ -97,7 +97,7 @@ auction_ps.setFloat(5, starting_price);
 auction_ps.setFloat(6, min_price);
 auction_ps.setFloat(7, bid_increment);
 auction_ps.setFloat(8, max_price);
-auction_ps.setFloat(9, 0);
+auction_ps.setFloat(9, starting_price);
 auction_ps.setBoolean(10, true);
 
 auction_ps.executeUpdate();

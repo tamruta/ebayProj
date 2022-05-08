@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
@@ -27,7 +26,6 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
     </div>
 
 <%
-
 	ApplicationDB db = new ApplicationDB();	
 	Class.forName("com.mysql.jdbc.Driver");
 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
@@ -38,7 +36,6 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 	
     ResultSet rs;
     rs = st.executeQuery("Select * from viewHistory where auction_id like '%" + item + "%'");
-
     if (rs.next() == true) {
         session.setAttribute("itemName", item); //delete?
         //response.sendRedirect("HelloWorld.jsp");
@@ -63,7 +60,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
  					<td><%=rs.getInt("item_id")%></td>
  					<td><%=rs.getFloat("price")%></td>
 					<td><%=rs.getInt("seller_id")%></td>
- 					<td><%=rs.getInt("buyer_id")%></td>			
+ 					<td><%=rs.getInt("user_account_id")%></td>			
  				</tr>
  			<%}%>
 		</table>
@@ -76,6 +73,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 	    	Enter Bid ID of bid to delete </td><td><input type="text" name="bidid"><br>
 			Enter Item ID of bid to delete </td><td><input type="text" name="itemid"><br>
 	    	Enter Seller ID </td><td><input type="text" name="sellerid"><br>
+	    	Enter Buyer ID </td><td><input type="text" name="buyerid"><br>
         <input type="submit" value="Delete Bid">
     	</form><br>
 

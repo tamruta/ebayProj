@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
@@ -27,18 +26,14 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 </div>
 
 <%
-
 ApplicationDB db = new ApplicationDB();	
 Class.forName("com.mysql.jdbc.Driver");
 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
 Statement st = con.createStatement();
-
 String item = request.getParameter("auctionid");   
     
-
 ResultSet rs;
 rs = st.executeQuery("Select * from users");
-
 if (rs.next() == true) {
     session.setAttribute("itemName", item); //delete?
     //response.sendRedirect("HelloWorld.jsp");
@@ -87,7 +82,6 @@ if (rs.next() == true) {
 }else {
     out.println("Invalid Search <a href='cusrep-home.jsp'>Go Back</a>");
 }
-
 con.close();
 %>
 <a href="#" onclick="history.go(-1)">Go Back onclick</a>

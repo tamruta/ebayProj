@@ -154,8 +154,6 @@ Statement stmt2 = con.createStatement();
   catch(Exception e){
 	  
   }
-	   
-  	
     	
     	try{
     		String autoBid = "INSERT into automatic_bid VALUES(?,?,?,?,?,?)";

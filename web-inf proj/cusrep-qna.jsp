@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%
-if ((session.getAttribute("userID") == null)) {
+    if (session.getAttribute("userID") == null) {
 %>
-You are not logged in<br/>
-<a href="Users.jsp">Please Login</a>
-<%} else {
+    You are not logged in!
+    <script type="text/javascript">
+      setTimeout(()=> { window.location.href="Users.jsp"; }, 1000);  
+    </script>
+<%
+}else {
 %>
 Welcome <%=session.getAttribute("userID")%> <br><br>
 
@@ -21,57 +24,60 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
   color: white;
   text-align: center;
 } </style>
-
 <div class="footer"> 
   <p><a href='welcome.jsp'>Home</a><br><a href='logout.jsp'>Log out</a></p>
 </div>
 
-<br><br>
-
-<a href="#" onclick="history.go(-1)">Go Back onclick</a>
-
-
 <%
-    ApplicationDB db = new ApplicationDB();	
-    Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
-    Statement st = con.createStatement();   
+ApplicationDB db = new ApplicationDB();	
+Class.forName("com.mysql.jdbc.Driver");
+Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
+Statement st = con.createStatement();
+String item = request.getParameter("auctionid");   
     
-    int q_id = Integer.parseInt(request.getParameter("qid"));  
-    String answer = request.getParameter("answer");
+ResultSet rs;
+rs = st.executeQuery("Select * from qna");
+if (rs.next() == true) {
+    %>
+     <table border="2" cellpadding="5">
+         <tr>
+             <td>Question Number</td>
+            <td>Question</td>
+             <td>Answer</td>
+             <td>Posted by</td>
+            <td>Answered by</td>
+             
+         </tr>
+         <%
+         rs.previous();
+         while(rs.next()){%>
+             <tr>
+                <td><%=rs.getInt("q_id")%></td>
+                <td><%=rs.getString("question")%></td>
+                <td><%=rs.getString("answer")%></td>
+                <td><%=rs.getInt("user_id")%></td>
+                <td><%=rs.getInt("cusrep_id")%></td>
+             </tr>
+         <%}%>
+    </table>
     
-    ResultSet rs, rs2;
-    
-    rs = st.executeQuery("Select * from qna where q_id= '" + q_id + "'");
-    if (rs.next()) {
-    	rs.previous();
-    	String sql = "update qna set answer = ?, cusrep_id = ? where q_id = ?";
 
-        PreparedStatement ps = con.prepareStatement(sql);
-        
-        String username = session.getAttribute("userID").toString();
-        int cusrep_id = 0;
-        rs2 = st.executeQuery("Select * from users where username = '"+username+"'");
+    <br><br>
 
-        if(rs2.next())
-          cusrep_id = rs2.getInt("account_id");
+    Reply To Question
+     <form action = 'cusrep-qna.jsp', method="post">
+        Question Number </td><td><input type="text" name="qid"><br>
+        Answer </td><td><input type="text" name="answer"><br>
+    <input type="submit" value="Reply">
+    </form><br>
 
-        ps.setString(1, answer);
- 		    ps.setInt(2, cusrep_id);
-        ps.setInt(3, q_id);
-        ps.executeUpdate();
-
-        out.println("Success!<a href='cusrep-home.jsp'>Go Back</a>");
-            
-    }else{
-          out.println("This question does not exist! <a href='cusrep-home.jsp'>Go Back</a>");
-      }   
-    con.close();
-    
-     
-
-
-
-
+ <%
+}else {
+    out.println("Invalid Search <a href='cusrep-home.jsp'>Go Back</a>");
+}
+con.close();
+%>
+<a href="#" onclick="history.go(-1)">Go Back onclick</a>
+<%
 }
 %>

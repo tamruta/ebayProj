@@ -8,11 +8,9 @@
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
     Statement st = con.createStatement();
-
     ResultSet rs;
     String sql = "SELECT a.auction_id, e.model_Number as item_name, a.current_price as price FROM auction a JOIN electronic_item e USING (item_id)";
     rs = st.executeQuery(sql);
-
     try{
         %>
         <b>All Auctions:</b>

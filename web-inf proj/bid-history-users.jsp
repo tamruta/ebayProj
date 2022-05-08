@@ -9,15 +9,12 @@
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyElectronics", "root", "Rootuser!1");	
     Statement st = con.createStatement();
     Statement st2 = con.createStatement();
-
     String username = request.getParameter("user");
     ResultSet rs, rs2;
     String sql = "SELECT DISTINCT v.auction_id as Auction_ID, e.model_Number as Item_Name FROM electronic_item e JOIN viewHistory v USING (item_id), users u WHERE u.account_id = v.user_account_id and u.username='" + username + "'";
     rs = st.executeQuery(sql);
-
     String sql2 = "SELECT DISTINCT v.auction_id as Auction_ID, e.model_Number as Item_Name FROM electronic_item e JOIN viewHistory v USING (item_id), users u WHERE u.account_id = v.seller_id and u.username='" + username + "'";
     rs2 = st2.executeQuery(sql2);
-
     pageContext.setAttribute("uName", username);
     try{
         %>
@@ -57,7 +54,6 @@
         out.print(e);
     }
     con.close();
-
     %>
     <br>
     <br>

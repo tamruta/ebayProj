@@ -39,7 +39,6 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
     
     ResultSet rs;
     rs = st.executeQuery("select * from users where username='" + username + "' and user_password = '"+password+"'");
-
     if (rs.next()) {
         switch(request.getParameter("perform")){
             case "del-acc": String sql = "delete from users where username = ? and user_password = ?";
@@ -49,7 +48,6 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
             ps.executeUpdate();
             out.println("Success!<a href='cusrep-home.jsp'>Go Back</a>");
             break;
-
             case "chn-pw": String sql2 = "update users set user_password = ? where username = ? and user_password = ?";
             PreparedStatement ps2 = con.prepareStatement(sql2);
             ps2.setString(1, newPassword);
@@ -58,7 +56,6 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
             ps2.executeUpdate();
             out.println("Success!<a href='cusrep-home.jsp'>Go Back</a>");
             break;
-
             case "chn-usn":String sql3 = "update users set username = ? where username = ? and user_password = ?";
             PreparedStatement ps3 = con.prepareStatement(sql3);
             ps3.setString(1, newUsername);
@@ -67,11 +64,8 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
             ps3.executeUpdate();
             out.println("Success!<a href='cusrep-home.jsp'>Go Back</a>");
             break;
-
             default: out.println("Invalid request<a href='cusrep-home.jsp'>try again</a>");
         }	
-
-
                 
     } else {
         out.println("Invalid username or password <a href='cusrep-home.jsp'>try again</a>");
