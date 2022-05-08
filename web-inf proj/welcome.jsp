@@ -17,21 +17,21 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 		<style> 
 			.footer {
 				position: fixed;
-				height: 150px;
+				height: 70px;
 				left: 0;
 				bottom: 0;
 				width: 100%;
-				font-size: 30;
+				font-size: 25;
 				background-color: rgb(211, 208, 208);
 				color: white;
 				text-align: center;}
 			body{
-				margin-bottom: -150px;
+				margin-bottom: -70px;
 			} 
 		</style>
 
 		<div class="footer"> 
-			<p><a href='welcome.jsp'>Home</a><br><a href='logout.jsp'>Log out</a></p>
+			<p><a href='welcome.jsp'>Home</a>      <a href='logout.jsp'>Log out</a></p>
 		</div>
 
 		<hr size="3">

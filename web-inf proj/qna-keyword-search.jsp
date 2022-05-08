@@ -41,7 +41,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
     String keyword = request.getParameter("keyword");
     
     ResultSet rs, rs2, rs3;
-    rs = st.executeQuery("select * from qna where question like '%"+keyword+"%'");
+    rs = st.executeQuery("select * from qna where question like '%"+keyword+"%' or answer like '%"+keyword+"%'");
     
     if (rs.next()) {
         %>

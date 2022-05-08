@@ -139,7 +139,7 @@ FOREIGN KEY(cusrep_id) references users(account_id) on delete cascade on update 
 
 INSERT INTO qna VALUES 
 (1, "My bid got deleted?", "You were being an asshole.", 4, 2), 
-(2, "How do I delete my item?", "I have deleted the auction for you.", 5, 2);
+(2, "How do I delete my item?", "I have deleted the auction and bids for you.", 5, 2);
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'Rootuser!1';
 
@@ -154,3 +154,6 @@ PRIMARY KEY (auction_id, buyer_id, seller_id),
 FOREIGN KEY (buyer_id) references users(account_id) on delete cascade on update cascade,
 FOREIGN KEY (seller_id) references users(account_id) on delete cascade on update cascade,
 FOREIGN KEY (item_id) references electronic_item(item_id) on delete restrict on update restrict);
+
+
+select * from qna where question like '%bid%' or answer like '%bid%';

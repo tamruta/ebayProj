@@ -45,6 +45,7 @@ if (rs.next() == true) {
          <tr>
              <th>User ID</th>
             <th>Username</th>
+            <th>Password</th>
              <th>Is Admin</th>
              <th>Is Customer Rep</th>
              
@@ -55,6 +56,7 @@ if (rs.next() == true) {
              <tr>
                  <td><%=rs.getInt("account_id")%></td>
                 <td><%=rs.getString("username")%></td>
+                <td><%=rs.getString("user_password")%></td>
                  <td><%=rs.getBoolean("isAdmin")%></td>
                  <td><%=rs.getBoolean("isCusRes")%></td>			
              </tr>
