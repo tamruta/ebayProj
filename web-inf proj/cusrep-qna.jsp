@@ -5,13 +5,6 @@
 <%
     if (session.getAttribute("userID") == null) {
 %>
-    You are not logged in!
-    <script type="text/javascript">
-      setTimeout(()=> { window.location.href="Users.jsp"; }, 1000);  
-    </script>
-<%
-}else {
-%>
 Welcome <%=session.getAttribute("userID")%> <br><br>
 
 <style> .footer {
@@ -36,26 +29,35 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyEle
 Statement st = con.createStatement();
 int q_id = Integer.parseInt(request.getParameter("qid")); 
 String answer = request.getParameter("answer");   
+out.println("qid "+ q_id+" answer "+answer);
+
 
     
-ResultSet rs;
+ResultSet rs, rs2;
 rs = st.executeQuery("select * from qna where q_id=" + q_id);
 if (rs.next()) {
         String sql2 = "update qna set answer = ? where q_id = ?";
+
+        String username = session.getAttribute("userID").toString();
+        int cusrep_id = 0;
+        rs2 = st.executeQuery("Select * from users where username = '"+username+"'");
+        if(rs2.next())
+            cusrep_id = rs2.getInt("account_id");
+
         PreparedStatement ps2 = con.prepareStatement(sql2);
         ps2.setString(1, answer);
         ps2.setInt(2, q_id);
         ps2.executeUpdate();
         out.println("Success!<a href='cusrep-home.jsp'>Go Back</a>");
     }	
-  
- <%
-}else {
+  else {
     out.println("Invalid Search <a href='cusrep-home.jsp'>Go Back</a>");
 }
 con.close();
 %>
 <a href="#" onclick="history.go(-1)">Go Back onclick</a>
 <%
-}
+}else{
+  out.println("You are not logged in!");
+  
 %>
