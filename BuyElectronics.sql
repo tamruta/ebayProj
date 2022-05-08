@@ -138,7 +138,7 @@ FOREIGN KEY(user_id) references users(account_id) on delete cascade on update ca
 FOREIGN KEY(cusrep_id) references users(account_id) on delete cascade on update cascade);
 
 INSERT INTO qna VALUES 
-(1, "My bid got deleted?", "You were being an asshole.", 4, 2), 
+(1, "My bid got deleted?", "Yup.", 4, 2), 
 (2, "How do I delete my item?", "I have deleted the auction and bids for you.", 5, 2);
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'Rootuser!1';
