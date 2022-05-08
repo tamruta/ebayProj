@@ -9,9 +9,7 @@
     <script type="text/javascript">
         setTimeout(()=> { window.location.href="Users.jsp"; }, 1000);  
     </script>
-<%} else {
-%>
-Welcome <%=session.getAttribute("userID")%> <br><br>
+<%}%> <br><br>
 
 <%
     ApplicationDB db = new ApplicationDB();	
