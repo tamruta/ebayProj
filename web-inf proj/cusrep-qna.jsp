@@ -51,7 +51,7 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
       PreparedStatement ps2 = con.prepareStatement(sql2);
       ps2.setString(1, answer);
       ps2.setInt(2, q_id);
-      ps2.setInt(3, cusrep_id)
+      ps2.setInt(3, cusrep_id);
       ps2.executeUpdate();
       out.println("Success!<a href='cusrep-home.jsp'>Go Back</a>");
     }	

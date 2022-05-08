@@ -52,15 +52,15 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
         %>
  		<table border="2" cellpadding="5">
  			<tr>
- 				<td>Auction ID</td>
-				<td>Bid ID</td>
- 				<td>Item ID</td>
-				<td>Item Name</td>
- 				<td>Current Price</td>
-				<td>Seller ID</td>
-				<td>Seller Name</td>
-				<td>Buyer ID</td>
-				<td>Buyer Name</td>
+ 				<th>Auction ID</th>
+				<th>Bid ID</th>
+ 				<th>Item ID</th>
+				<th>Item Name</th>
+ 				<th>Current Price</th>
+				<th>Seller ID</th>
+				<th>Seller Name</th>
+				<th>Buyer ID</th>
+				<th>Buyer Name</th>
  				
  			</tr>
  			<%
@@ -110,7 +110,7 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 		</form>
  	<%
     }else {
-        out.println("Invalid Search! ");
+        out.println("Invalid Search!");
     }
     
     con.close();

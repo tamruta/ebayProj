@@ -43,10 +43,10 @@ if (rs.next() == true) {
     %>
      <table border="2" cellpadding="5">
          <tr>
-             <td>User ID</td>
-            <td>Username</td>
-             <td>Is Admin</td>
-             <td>Is Customer Rep</td>
+             <th>User ID</th>
+            <th>Username</th>
+             <th>Is Admin</th>
+             <th>Is Customer Rep</th>
              
          </tr>
          <%
@@ -82,7 +82,7 @@ if (rs.next() == true) {
     
  <%
 }else {
-    out.println("Invalid Search");
+    out.println("Invalid Search!");
 }
 con.close();
 %>

@@ -47,11 +47,11 @@ pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 %>
       <table border="2" cellpadding="5">
         <tr>
-          <td>Question Number</td>
-          <td>Question</td>
-          <td>Answer</td>
-          <td>Posted by</td>
-          <td>Answered by</td>
+          <th>Question Number</th>
+          <th>Question</th>
+           <th>Answer</th>
+           <th>Posted by </th>
+          <th>Answered by</th>
         </tr>
 <%
       rs.previous();

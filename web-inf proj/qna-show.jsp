@@ -45,11 +45,11 @@ if (rs.next() == true) {
     %>
      <table border="2" cellpadding="5">
          <tr>
-             <td>Question Number</td>
-            <td>Question</td>
-             <td>Answer</td>
-             <td>Posted by</td>
-            <td>Answered by</td>
+             <th>Question Number</th>
+            <th>Question</th>
+             <th>Answer</th>
+             <th>Posted by </th>
+            <th>Answered by</th>
              
          </tr>
          <%
@@ -101,7 +101,6 @@ if (rs.next() == true) {
 
 con.close();
 %>
-<a href="#" onclick="history.go(-1)">Go Back </a>
-<%
+<a href='welcome.jsp'>Go Back</a><%
 }
 %>

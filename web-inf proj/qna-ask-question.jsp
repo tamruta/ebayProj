@@ -30,9 +30,6 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
 
 <br><br>
 
-<a href="#" onclick="history.go(-1)">Go Back onclick</a>
-
-
 <%
     ApplicationDB db = new ApplicationDB();	
     Class.forName("com.mysql.jdbc.Driver");
@@ -64,17 +61,13 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
         ps.setInt(3, user_id);
         ps.executeUpdate();
 
-        out.println("Success!<a href='welcome.jsp'>Go Back</a>");
+        out.println("Success!");
             
     }else{
-          out.println("No Question Entered. <a href='cusrep-home.jsp'>Go Back</a>");
+          out.println("No Question Entered.");
       }   
     con.close();
     
-     
-
-
-
-
+    out.println("<a href='qna-show.jsp'>Go Back</a>");
 }
 %>

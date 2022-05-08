@@ -47,11 +47,11 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
         %>
          <table border="2" cellpadding="5">
              <tr>
-                 <td>Question Number</td>
-                <td>Question</td>
-                 <td>Answer</td>
-                 <td>Posted by</td>
-                <td>Answered by</td>
+                 <th>Question Number</th>
+                <th>Question</th>
+                 <th>Answer</th>
+                 <th>Posted by</th>
+                <th>Answered by</th>
                  
              </tr>
              <%
@@ -83,12 +83,11 @@ Welcome <%=session.getAttribute("userID")%> <br><br>
         
     
         <br><br>
-        <a href='welcome.jsp'>Go Back</a>
      <%
     }else{
-          out.println("No QnA found. <a href='welcome.jsp'>Go Back</a>");
+          out.println("No QnA found.");
       }   
     con.close();
-    
+    out.println("<a href='qna-show.jsp'>Go Back</a>");
 }
 %>

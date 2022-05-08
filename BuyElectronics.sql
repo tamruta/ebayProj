@@ -116,8 +116,8 @@ item_id int,
 alert_active bool default false,
 alert_type varchar(100),
 PRIMARY KEY(alert_id),
-FOREIGN KEY(account_id) references users(account_id),
-FOREIGN KEY(item_id) references electronic_item(item_id));
+FOREIGN KEY(account_id) references users(account_id) on delete cascade on update cascade,
+FOREIGN KEY(item_id) references electronic_item(item_id)on delete cascade on update cascade);
 
 -- have not added to this, don't know what this would be used for
 CREATE TABLE IF NOT EXISTS search(
@@ -134,8 +134,8 @@ question varchar(100),
 answer varchar(200),
 user_id int,
 cusrep_id int,
-FOREIGN KEY(user_id) references users(account_id) on delete restrict on update restrict,
-FOREIGN KEY(cusrep_id) references users(account_id) on delete restrict on update restrict);
+FOREIGN KEY(user_id) references users(account_id) on delete cascade on update cascade,
+FOREIGN KEY(cusrep_id) references users(account_id) on delete cascade on update cascade);
 
 INSERT INTO qna VALUES 
 (1, "My bid got deleted?", "You were being an asshole.", 4, 2), 
@@ -151,9 +151,6 @@ item_id int,
 current_price float,
 increment float,
 PRIMARY KEY (auction_id, buyer_id, seller_id),
-FOREIGN KEY (buyer_id) references users(account_id) on delete restrict on update restrict,
-FOREIGN KEY (seller_id) references users(account_id) on delete restrict on update restrict,
+FOREIGN KEY (buyer_id) references users(account_id) on delete cascade on update cascade,
+FOREIGN KEY (seller_id) references users(account_id) on delete cascade on update cascade,
 FOREIGN KEY (item_id) references electronic_item(item_id) on delete restrict on update restrict);
-
-SELECT * FROM qna;
-SELECT * from qna where question like '%bid%'; 
