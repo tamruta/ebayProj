@@ -87,15 +87,21 @@ if (rs.next() == true) {
         Question </td><td><input type="text" name="question" required><br>
     <input type="submit" value="Ask">
     </form><br>
+    
+    Search using a keyword     
+    <form action = 'qna-keyword-search.jsp', method="post">
+        Keyword </td><td><input type="text" name="keyword" required><br>
+    <input type="submit" value="Ask">
+    </form><br>
 
  <%
 }else {
-    out.println("Invalid Search <a href='cusrep-home.jsp'>Go Back</a>");
+    out.println("Invalid Search.");
 }
 
 con.close();
 %>
-<a href="#" onclick="history.go(-1)">Go Back onclick</a>
+<a href="#" onclick="history.go(-1)">Go Back </a>
 <%
 }
 %>

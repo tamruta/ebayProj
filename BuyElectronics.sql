@@ -155,9 +155,5 @@ FOREIGN KEY (buyer_id) references users(account_id) on delete restrict on update
 FOREIGN KEY (seller_id) references users(account_id) on delete restrict on update restrict,
 FOREIGN KEY (item_id) references electronic_item(item_id) on delete restrict on update restrict);
 
-SELECT * FROM users;
-SELECT * FROM electronic_item;
-SELECT * FROM auction;
-SELECT * FROM viewHistory;
-
-Select max(price), seller_id from viewHistory where item_id = 3;
+SELECT * FROM qna;
+SELECT * from qna where question like '%bid%'; 
